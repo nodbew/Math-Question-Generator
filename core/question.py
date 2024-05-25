@@ -13,6 +13,13 @@ class QuestionFormat:
         """
         assert type(fmt) == list
         
+        self._characters = dict()
+        
+        for i, elem in enumerate(fmt):
+            if isinstance(elem, generators.CharacterGenerator):
+                fmt[i] = elem.__next__()
+                self._characters[fmt[i]] = sy.Symbol(fmt[i])
+        
         self._callables = [elem for elem in fmt if callable(elem)]
         self._format = "".join("{}" if callable(elem) else elem for elem in fmt)
         return
