@@ -4,7 +4,7 @@ def _input(input:str) -> str|int:
     '''
     return input
 
-def input(input:str, target:str):
+def callback(input:str, target:str):
     '''
     Takes an input and returns a callback function that appends the input to st.session_state.*
     '''
