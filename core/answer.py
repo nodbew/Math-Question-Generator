@@ -32,4 +32,5 @@ def parse(answer:str) -> sy.Expr:
     '''
     Takes a string that represents the user's answer, and returns an evaluate-able string that represents the answer.
     '''
+    # Memo °はキーボードでつける
     return answer
