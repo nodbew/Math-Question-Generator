@@ -36,3 +36,26 @@ class NumberGenerator(_BaseGenerator):
 
     def __call__(self):
         return self._generator(low = self._low, high = self._high)
+
+class CharacterGenerator(_BaseGenerator):
+    '''
+    Generator object that returns an unused alphabet. 
+    It all alphabets are used, returns subscripted alphabets with latex-styled string.
+    '''
+    def __init__(self):
+        self._current_ord = 97
+        self._subscript = 0
+        return
+
+    def __call__(self):
+        if self._subscript == 0:
+            response = chr(self._current_ord)
+        else:
+            response = chr(self._current_ord) + '_' + str(self._subscript)
+            
+        self._current_ord += 1
+        if self._current_ord == 123: # ord('z') == 122
+            self._current_ord = 97
+            self._subscript += 1
+
+        return response
