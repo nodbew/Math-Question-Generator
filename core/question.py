@@ -47,3 +47,30 @@ class QuestionFormat:
                 return question
 
         raise answer.RegulationError('条件に合う問題が見つかりませんでした  \n設定を変更するか、問題形式を変更してください')
+
+    def check(self, ans) -> bool:
+        '''
+        Parses the answer in an appropriate way and checks the answer.
+        '''
+        if Parse(answer) == self._answer:
+            return True
+        else:
+            return False
+
+class ExpansionQuestionFormat:
+    '''
+    Answer calculation has one more step in this class, that is, expanding a polynomial formula.
+    '''
+    def generate(self):
+        question = super().generate()
+        self._answer = sy.expand(self._answer)
+        return question
+
+class FactorizationQuestionFormat:
+    '''
+    Factorized formula will be the answer.
+    '''
+    def generate(self):
+        question = super().generate()
+        self._answer = sy.factorize(self._answer)
+        return question
