@@ -1,6 +1,8 @@
 import numpy as np
 import sympy as sy
 
+from . import answer
+
 class QuestionFormat:
     def __init__(self, fmt:list) -> None:
         """
@@ -52,7 +54,7 @@ class QuestionFormat:
         '''
         Parses the answer in an appropriate way and checks the answer.
         '''
-        if Parse(answer) == self._answer:
+        if answer.parse(answer) == self._answer:
             return True
         else:
             return False
