@@ -17,7 +17,7 @@ class _BaseGenerator:
         return self.__call__()
         
 class OperandGenerator(_BaseGenerator):
-     '''
+    '''
     Generator object that returns a random operand from the given operands list.
     '''
     def __init__(self, operands = ['+', '-']):
