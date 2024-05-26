@@ -15,7 +15,10 @@ def callback(input:str, target:str):
         return _callback
     elif input == 'Back Space':
         def _callback():
-            st.session_state.pop(-1)
+            try:
+                st.session_state.pop(-1)
+            except IndexError:
+                pass
             return
         return _callback
     else:
