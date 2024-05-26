@@ -1,7 +1,7 @@
 import sympy as sy
 import streamlit as st
 
-class RegulationError(Exception):pass
+class SettingViolation(Exception):pass
 
 def calculate_answer(evaluated_question):
     '''
@@ -24,6 +24,12 @@ def calculate_answer(evaluated_question):
         if not settings['虚数解を許容する']:
             answers = [ans for ans in answers if ans.has(sy.I)]
             if len(answers) == 0:
-                raise RegulationError('設定違反：虚数解')
+                raise SettingViolation('設定違反：虚数解')
 
         return answers
+
+def parse(answer:str) -> sy.Expr:
+    '''
+    Takes a string that represents the user's answer, and returns an evaluate-able string that represents the answer.
+    '''
+    return answer
