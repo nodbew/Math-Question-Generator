@@ -43,7 +43,7 @@ class QuestionFormat:
             # Hold the answer for the question
             try:
                 self._answer = answer.calculate_answer(q)
-            except answer.RegulationError:
+            except answer.SettingViolation:
                 continue
             else:
                 return question
