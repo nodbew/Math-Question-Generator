@@ -5,36 +5,45 @@ class QuestionFormat:
     def __init__(self, fmt:list) -> None:
         """
         Converts a list into question format.
-        fmt should be a list of CharacterGenerator, 
-                                OperandGenerator, 
+        fmt should be a list of OperandGenerator, 
                                 Operands(str),
                                 NumberGeberator,
                                 and numbers.
         """
         assert type(fmt) == list
         
-        self._characters = dict()
-        
-        for i, elem in enumerate(fmt):
-            if isinstance(elem, generators.CharacterGenerator):
-                fmt[i] = elem.__next__()
-                self._characters[fmt[i]] = sy.Symbol(fmt[i])
-        
-        self._callables = [elem for elem in fmt if callable(elem)]
-        self._format = "".join("{}" if callable(elem) else elem for elem in fmt)
+        self._characters = {elem:sy.Symbol(elem) for elem in fmt if 97 <= ord(elem[0]) <= 122} # Extract alphabets from the list
+        self._callables = [elem for elem in fmt if callable(elem)] # Split callables from others
+        self._format = "".join("{}" if callable(elem) else elem for elem in fmt) # Use str.format afterward
         return
         
     def generate(self) -> str:
-        # Create a question string
-        question = self._format.format(*[callable.__call__() for callable in self._callables])
+        '''
+        Try to generate a question that fits the settings until it reaches the recursion limit.
+        Recursion limit is set because it is hard to detect "ungenerateable" problems, and it is 50.
         
-        # Check the question is valid as a formula
-        try:
-            q = eval(question, {"__builtins__":None}, self._characters)
-        except SyntaxError:
-            raise SyntaxError("有効な問題形式ではありません")
+        This method basically substitutes actual values(e.g. numbers, operands) into the format string.
+        Then, evaluates it and calculates the answer.
+        '''
+        callables = self._callables
+        characters = self._characters
         
-        # Hold the answer for the question
-        self._answer = sy.solve(a)
+        for _ in range(50): # Recursion limit
+            # Create a question string
+            question = self._format.format(*[callable.__call__() for callable in callables])
         
-        return question
+            # Check the question is valid as a formula
+            try:
+                q = eval(question, {"__builtins__":None}, characters)
+            except SyntaxError:
+                raise SyntaxError("有効な問題形式ではありません")
+        
+            # Hold the answer for the question
+            try:
+                self._answer = answer.calculate_answer(q)
+            except answer.RegulationError:
+                continue
+            else:
+                return question
+
+        raise answer.RegulationError('条件に合う問題が見つかりませんでした  \n設定を変更するか、問題形式を変更してください')
