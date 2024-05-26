@@ -1,4 +1,5 @@
-def _input(input:str) -> str|int:
+def input(input:str) -> str|int:
     '''
-    Adds a 
+    Adds the input to st.session_state.*(Assigned in core.components.keyboard.Keyboard.__init__, when creating st.button)
     '''
+    return input
