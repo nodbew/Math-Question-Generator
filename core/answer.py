@@ -15,8 +15,15 @@ def calculate_answer(evaluated_question):
         return evaluated_question
 
     else:
-        # Sympy expr
-        answer = sy.solve(evaluated_question, a)
+        # Sympy Expr
+        # Answer and settings
+        answers = sy.solve(evaluated_question, sy.Symbol('a'))
         settings = st.session_state.settings
+
+        # Complex answers
         if not settings['虚数解を許容する']:
-            
+            answers = [ans for ans in answers if ans.has(sy.I)]
+            if len(answers) == 0:
+                raise RegulationError('設定違反：虚数解')
+
+        return answers
