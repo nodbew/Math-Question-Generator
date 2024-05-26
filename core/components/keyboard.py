@@ -18,7 +18,7 @@ class Keyboard:
         buttons = {st.button(
             label = key,
             key = f'Key_{key}_at_keyboard_{id(self)}',
-            on_click = inputter.input(value),
+            on_click = st.session_state[target].append(inputter.input(value)),
             use_container_width = True
                             ) for key, value in keys.items()}
         
