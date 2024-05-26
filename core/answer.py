@@ -21,7 +21,7 @@ def calculate_answer(evaluated_question):
         settings = st.session_state.settings
 
         # Complex answers
-        if not settings['虚数解を許容する']:
+        if not settings['複素数解を許容する']:
             answers = [ans for ans in answers if ans.has(sy.I)]
             if len(answers) == 0:
                 raise SettingViolation('設定違反：虚数解')
