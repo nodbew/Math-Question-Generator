@@ -1,4 +1,4 @@
-CALCULATION_SIGNS = ('+', '-', '*', '/', '^')
+CALCULATION_SIGNS = ('+', '-', '*', '/', '^', r'^{\circ}')
 BRACKETS = ('{', '}')
 FUNCTIONS = (r'\log_', r'\sin', r'\cos', r'\tan', r'\sqrt[2]')
 CONSTANTS = (r'\pi', 'I')
