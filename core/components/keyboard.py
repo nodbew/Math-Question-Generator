@@ -2,6 +2,15 @@ import streamlit as st
 
 from . import inputter
 
+class ButtonPlaceHolder:
+    def __init__(self, *args, **kwargs):
+        self._args = args
+        self._kwargs = kwargs
+        return
+        
+    def __bool__(self):
+        return st.button(*args, **kwargs)
+
 class Keyboard:
     '''
     Prepares a virtual keyboard with the given keys.
@@ -17,7 +26,7 @@ class Keyboard:
 
         self._col_num = col_num
         
-        self._buttons = [st.button(
+        self._buttons = [ButtonPlaceHolder(
             label = key,
             key = f'Key_{key}_at_keyboard_{id(self)}',
             on_click = inputter.callback(value, target),
