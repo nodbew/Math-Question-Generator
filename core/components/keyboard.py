@@ -25,7 +25,7 @@ class Keyboard:
                             ) for key, value in keys.items()]
         
         return
-
+        
     def add_key(self, keys:dict):
         '''
         Adds the given keys to the keyboard.
@@ -43,6 +43,14 @@ class Keyboard:
     def remove_key(self, key:str|list):
         if type(key) == str:
             button = st.session_state[f'Key_{key}_at_keyboard_{id(self)}']
+            self._buttons = [btn for btn in self._buttons if btn is not button]
+            return
+        elif type(key) == list:
+            buttons = [st.session_state[f'Key_{k}_at_keyboard_{id(self)}'] for k in keys]
+            self._buttons = [btn for btn in self._buttons if btn not in buttons]
+            return
+        else:
+            raise TypeError(f'An argument for Keyboard.remove_key method must be a str of a list, not {type(key)}')
             
 
     def place(self):
