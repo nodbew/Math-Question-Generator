@@ -20,7 +20,7 @@ class Keyboard:
         self._buttons = [st.button(
             label = key,
             key = f'Key_{key}_at_keyboard_{id(self)}',
-            on_click = inputter.callback(value, target)
+            on_click = inputter.callback(value, target),
             use_container_width = True
                             ) for key, value in keys.items()]
         return
@@ -33,7 +33,7 @@ class Keyboard:
             label = key,
             key = f'Key_{key}_at_keyboard_{id(self)}',
             on_click = inputter.callback(value, target),
-            use_container_width = True
+            use_container_width = True,
         ) for key, value in keys.items()]
         
         self._buttons += new_buttons
