@@ -14,30 +14,45 @@ class Keyboard:
         """
         if target not in st.session_state:
             raise KeyError(f"st.session_state does not have a key {target}")
+
+        self._col_num = col_num
         
-        buttons = {st.button(
+        self._buttons = [st.button(
             label = key,
             key = f'Key_{key}_at_keyboard_{id(self)}',
             on_click = inputter.callback(value, target)
             use_container_width = True
-                            ) for key, value in keys.items()}
+                            ) for key, value in keys.items()]
         
-        def _place():
-            '''
-            A function that places the actual keyboard.
-            '''
-            for i, col in enumerate(st.columns(col_num)):
-                buttons_to_use = buttons[i * col_num : (i + 1) * col_num]
-                with col:
-                    for i in buttons_to_use:
-                        if i:pass
-            return 
-        self._place = _place
         return
+
+    def add_key(self, keys:dict):
+        '''
+        Adds the given keys to the keyboard.
+        '''
+        new_buttons = [st.button(
+            label = key,
+            key = f'Key_{key}_at_keyboard_{id(self)}',
+            on_click = inputter.callback(value, target)
+            use_container_width = True
+                            ) for key, value in keys.items()]
+        
+        self._buttons += new_buttons
+        return
+
+    def remove_key(self, key:str|list):
+        if type(key) == str:
+            button = st.session_state[f'Key_{key}_at_keyboard_{id(self)}']
+            
 
     def place(self):
         '''
         Places the keyboard.
         '''
-        self._place()
+        for i, col in enumerate(st.columns(col_num)):
+                buttons_to_use = self._buttons[i * col_num : (i + 1) * col_num]
+                with col:
+                    for i in buttons_to_use:
+                        if i:
+                            pass
         return
