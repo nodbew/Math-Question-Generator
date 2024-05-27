@@ -35,7 +35,8 @@ def default_keyboard():
         '.' : ("."),
         '=' : ("="),
         '＋' : ("+"), # Same as '-'
-        ',' : ',' 
+        ',' : ',',
+        '°' : r'^{\circ}'
     }
 
 def default_format_keyboard():
