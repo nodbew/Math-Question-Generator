@@ -1,35 +1,52 @@
+import streamlit as st
+
+from ..core import generators
+
 def default_keyboard():
     '''
     Returns a dictionary that can be directly used to create a Keyboard object.
     '''
     return {
-                                            "全消し" : 'All Clear',
-                                            'BS' : 'Back Space'
-                                            "log" : _input(r'\log_', target),
-                                            '7' : _input(7, target),
-                                            '8' : _input(8, target),
-                                            '9' : _input(9, target),
-                                            '÷' : _input(r"\div", target),
-                                            'sin' : _input(r"\sin", target),
-                                            'cos' : _input(r"\cos", target),
-                                            'tan' : _input(r"\tan", target),
-                                            '4' : _input(4, target),
-                                            '5' : _input(5, target),
-                                            '6' : _input(6, target),
-                                            '×' : _input(r"\times", target),
-                                            'π' : _input(r"\pi", target),
-                                            'i' : _input("I", target),
-                                            '√' : _input(r"\sqrt[2]", target),
-                                            '1' : _input(1, target),
-                                            '2' : _input(2, target),
-                                            '3' : _input(3, target),
-                                            'ー' : _input("-", target), # ASCII '-' doesn't get displayed??
-                                            '(' : _input("{", target),
-                                            ')' : _input("}", target),
-                                            '累乗' : _input("^", target),
-                                            '0' : _input(0, target),
-                                            '.' : _input(".", target),
-                                            '=' : _input("=", target),
-                                            '＋' : _input("+", target), # Same as '-'
-                                            ',' : _input(',', target)
-                                           }
+        "全消し" : 'All Clear',
+        'BS' : 'Back Space',
+        "log" : (r'\log_'),
+        '7' : (7),
+        '8' : (8),
+        '9' : (9),
+        '÷' : (r"\div"),
+        'sin' : (r"\sin"),
+        'cos' : (r"\cos"),
+        'tan' : (r"\tan"),
+        '4' : (4),
+        '5' : (5),
+        '6' : (6),
+        '×' : (r"\times"),
+        'π' : (r"\pi"),
+        'i' : ("I"),
+        '√' : (r"\sqrt[2]"),
+        '1' : 1,
+        '2' : (2),
+        '3' : (3),
+        'ー' : ("-"), # ASCII '-' doesn't get displayed??
+        '(' : ("{"),
+        ')' : ("}"),
+        '累乗' : ("^"),
+        '0' : (0),
+        '.' : ("."),
+        '=' : ("="),
+        '＋' : ("+"), # Same as '-'
+        ',' : ',' 
+    }
+
+def default_format_keyboard():
+    '''
+    Based on default_keyboard, adds some additional keys for creating QuestionFormat object.
+    '''
+    default = default_keybaord()
+    character_generator = generators.CharacterGenerator()
+    additional = {
+        '係数' : generators.NumberGenerator(),
+        '文字' : character_generator,
+        '記号' : st.session_state.OperandGenerator,
+    }
+    return default | additional
