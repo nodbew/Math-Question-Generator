@@ -27,7 +27,7 @@ def default_keyboard():
         '1' : 1,
         '2' : (2),
         '3' : (3),
-        'ー' : ("-"), # ASCII '-' doesn't get displayed??
+        'ー' : ("-"), # ASCII '-' not displayed properly??
         '(' : ("{"),
         ')' : ("}"),
         '累乗' : ("^"),
