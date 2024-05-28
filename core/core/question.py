@@ -48,7 +48,7 @@ class QuestionFormat:
             except answer.SettingViolation:
                 continue
             else:
-                return question
+                return q
 
         raise answer.RegulationError('条件に合う問題が見つかりませんでした  \n設定を変更するか、問題形式を変更してください')
 
