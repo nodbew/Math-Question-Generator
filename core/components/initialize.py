@@ -43,7 +43,7 @@ def default_format_keyboard():
     '''
     Based on default_keyboard, adds some additional keys for creating QuestionFormat object.
     '''
-    default = default_keybaord()
+    default = default_keyboard()
     character_generator = generators.CharacterGenerator()
     additional = {
         '係数' : generators.NumberGenerator(),
