@@ -15,7 +15,7 @@ def template():
         key = 'template_selectbox',
         options = options,
         index = options.index('二次方程式の求解'),
-        on_change = lambda:exec('st.session_state.current_template = opitons.index(st.session_state[template_selectbox])')
+        on_change = lambda:exec('st.session_state.current_template = st.session_state.templates[st.session_state[template_selectbox]]')
     )
 
     # Add template
@@ -39,7 +39,11 @@ def template():
     st.header('問題形式の削除')
     st.info('現在選択されている問題形式を削除します')
     if st.button('削除'):
-        st.session_state.templates.pop(st.session_state.templates.index(st.session_state.current_template))
+        for key, value in st.session_state.templates.items():
+            if value is st.session_state.current_template:
+                del st.session_state.templates[key]
+                break
+                
         del st.session_state.current_template
         st.session_state.current_template = st.session_state.templates[0]
     
