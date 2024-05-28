@@ -2,6 +2,7 @@ import numpy as np
 import sympy as sy
 
 from . import answer
+from . import error_handler
 
 class QuestionFormat:
     def __init__(self, fmt:list) -> None:
@@ -19,7 +20,7 @@ class QuestionFormat:
         self._format = "".join("{}" if callable(elem) else elem for elem in fmt) # Use str.format afterward
         return
 
-    @error_handler
+    @error_handler.error_handler
     def generate(self) -> str:
         '''
         Try to generate a question that fits the settings until it reaches the recursion limit.
