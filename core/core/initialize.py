@@ -39,4 +39,4 @@ def polynomial_problem(element : int = 1, dimension : int = 2, raw_format = Fals
     if raw_format:
         return list(_flatten(format))[:-1]# Remove calculation symbol at the end of the list
     else:
-        return question.Problem(list(_flatten(format))[:-1])
+        return question.QuestionFormat(list(_flatten(format))[:-1])
