@@ -40,7 +40,7 @@ class Keyboard:
                             ) for key, value in keys.items()]
         return
     
-    def add_key(self, keys:dict):
+    def add_keys(self, keys:dict):
         '''
         Adds the given keys to the keyboard.
         '''
@@ -54,7 +54,7 @@ class Keyboard:
         self._buttons += new_buttons
         return
 
-    def remove_key(self, key:str|list):
+    def remove_keys(self, key:str|list):
         if type(key) == str:
             self._buttons = [btn for btn in self._buttons if not (btn.key == f'key_{key}_at_keyboard_{id(self)}')]
             return
