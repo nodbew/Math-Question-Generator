@@ -17,6 +17,7 @@ def main():
         result = st.session_state.current_template.check_answer(
             answer.evaluate()
         )
+        
         if result:
             st.success('正解！')
             st.session_state.correct_count += 1
@@ -33,9 +34,12 @@ def main():
         # Initialize user input
         st.session_state.input = []
 
+        # Refresh keyboard
+        keyboard
+
     # Print question and formula
     st.write(st.session_state.current_template.QUESTION)
-    st.write('$' + st.session_state.current_question + '$')
+    st.write('$' + sy.latex(st.session_state.current_question) + '$')
 
     # Print user input
     st.write("$" + answer.parse() + "$")
