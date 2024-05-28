@@ -18,7 +18,8 @@ class QuestionFormat:
         self._callables = [elem for elem in fmt if callable(elem)] # Split callables from others
         self._format = "".join("{}" if callable(elem) else elem for elem in fmt) # Use str.format afterward
         return
-        
+
+    @error_handler
     def generate(self) -> str:
         '''
         Try to generate a question that fits the settings until it reaches the recursion limit.
