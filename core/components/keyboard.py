@@ -7,6 +7,12 @@ class ButtonPlaceHolder:
         self._args = args
         self._kwargs = kwargs
         return
+
+    def __getattr__(self, attr, default = None):
+        if attr in self._kwargs:
+            return self._kwargs[attr]
+        else:
+            return default
         
     def __bool__(self):
         return st.button(*args, **kwargs)
@@ -40,7 +46,7 @@ class Keyboard:
         '''
         new_buttons = [st.button(
             label = key,
-            key = f'Key_{key}_at_keyboard_{id(self)}',
+            key = f'key_{key}_at_keyboard_{id(self)}',
             on_click = inputter.callback(value, target),
             use_container_width = True,
         ) for key, value in keys.items()]
@@ -50,12 +56,11 @@ class Keyboard:
 
     def remove_key(self, key:str|list):
         if type(key) == str:
-            button = st.session_state[f'Key_{key}_at_keyboard_{id(self)}']
-            self._buttons = [btn for btn in self._buttons if btn is not button]
+            self._buttons = [btn for btn in self._buttons if not (btn.key == f'key_{key}_at_keyboard_{id(self)}')]
             return
         elif type(key) == list:
-            buttons = [st.session_state[f'Key_{k}_at_keyboard_{id(self)}'] for k in keys]
-            self._buttons = [btn for btn in self._buttons if btn not in buttons]
+            for key in keys:
+                self.remove_key(key)
             return
         else:
             raise TypeError(f'An argument for Keyboard.remove_key method must be a str of a list, not {type(key)}')
