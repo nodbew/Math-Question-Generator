@@ -15,7 +15,7 @@ def operand_generator():
 
 def _flatten(iterable):
     for elem in iterable:
-        if isinstance(iterable, Iterable) and not isinstance(iterable, (str, bytes)):
+        if isinstance(iterable, (list, tuple)):
             yield from _flatten(elem)
         else:
             yield elem
