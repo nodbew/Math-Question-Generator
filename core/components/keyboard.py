@@ -64,7 +64,9 @@ class Keyboard:
             return
         else:
             raise TypeError(f'An argument for Keyboard.remove_key method must be a str of a list, not {type(key)}')
-            
+
+    def get_keys(self):
+        return [btn.key for btn in self._buttons]
 
     def place(self):
         '''
