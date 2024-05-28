@@ -37,7 +37,7 @@ def main():
         # Refresh keyboard
         character_keys = [key for key in st.session_state.input_keyboard.get_keys() if 97 <= ord(key) <= 122]
         st.session_state.input_keyboard.remove_keys(character_keys)
-        st.session_state.input_keyboard.add_keys(list(st.session_state.current_template.characters.keys()))
+        st.session_state.input_keyboard.add_keys({key : sy.Symbol(key) for key in st.session_state.current_template.characters.keys()})
 
     # Print question and formula
     st.write(st.session_state.current_template.QUESTION)
