@@ -3,9 +3,6 @@ import datetime
 
 '''
 Show statistics.
-Needed st.session_state keys: - correct_count
-                              - count
-                              - start_time
 '''
 
 def statistics():
