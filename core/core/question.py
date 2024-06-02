@@ -11,7 +11,8 @@ class QuestionFormat:
         fmt should be a list of OperandGenerator, 
                                 Operands(str),
                                 NumberGeberator,
-                                and numbers.
+                                numbers(int),
+                                and generators.SympyFunction object.
         """
         assert type(fmt) == list
         
