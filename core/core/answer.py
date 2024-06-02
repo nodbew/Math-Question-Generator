@@ -85,13 +85,28 @@ def format_evaluate(input:str = None) -> str:
 
     # Split with operands
     i = 0
-    in_parenthesis = 0
     fmt = re.split('([-+*/])', value_str)
     while i < len(fmt):
-        if fmt[i].startswith('generators.SympyFunction('):
+        if fmt[i].strip().startswith('generators.SympyFunction('):
+            fmt[i] = fmt[i].strip()
+            
             # generators.SympyFunction(sy.sin, (27) * (3)) -> ['generators.SympyFunction(sy.sin, (27)', '*', '(3))']
-            parenthesis = 
-            fmt[i] = fmt[i] + fmt[i + 1] + fmt[i + 2]
-            fmt[i + 1] = ''
-            fmt[i + 2] = ''
-        elif 
+            parenthesis = len(fmt[i]) - len(fmt[i].lstrip('(')) # Number of parenthesis
+            if fmt[i].endswith(')'*parenthesis):
+                i += 1
+                continue
+                
+            else:
+                j = i
+                while not fmt[j].endswith(')'*parenthesis):
+                    j += 1
+                for _ in range(j):
+                    fmt[i] += fmt.pop(i + 1)
+
+                fmt[i] = eval(fmt[i]) # generators.SympyFunciton object
+
+                i += 1
+                continue
+
+        elif '^' in fmt[i]:
+            fmt[i] = fmt[i].replace('^', '**')
