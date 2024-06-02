@@ -39,7 +39,7 @@ class QuestionFormat:
         
             # Check the question is valid as a formula
             try:
-                q = eval(question, {"__builtins__":None}, characters)
+                q = eval(question, {"__builtins__":None, 'sy':sy}, characters)
             except SyntaxError:
                 raise SyntaxError("有効な問題形式ではありません")
         
