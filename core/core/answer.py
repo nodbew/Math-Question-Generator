@@ -57,8 +57,6 @@ def format_evaluate(input:str = None) -> str:
     if input == []:
         return []
 
-    char_gen = generators.CharacterGenerator()
-
     value_str = ''.join(str(elem) for elem in input).replace('{', '(').replace('}', ')')
 
     # Check unterminated parenthesis
@@ -85,6 +83,7 @@ def format_evaluate(input:str = None) -> str:
 
     # Split with operands
     i = 0
+    char_gen = generators.CharacterGenerator()
     fmt = re.split('([-+*/])', value_str)
     while i < len(fmt):
         if fmt[i].strip().startswith('generators.SympyFunction('):
@@ -92,11 +91,7 @@ def format_evaluate(input:str = None) -> str:
             
             # generators.SympyFunction(sy.sin, (27) * (3)) -> ['generators.SympyFunction(sy.sin, (27)', '*', '(3))']
             parenthesis = len(fmt[i]) - len(fmt[i].lstrip('(')) # Number of parenthesis
-            if fmt[i].endswith(')'*parenthesis):
-                i += 1
-                continue
-                
-            else:
+            if not fmt[i].endswith(')'*parenthesis):
                 j = i
                 while not fmt[j].endswith(')'*parenthesis):
                     j += 1
@@ -105,8 +100,18 @@ def format_evaluate(input:str = None) -> str:
 
                 fmt[i] = eval(fmt[i]) # generators.SympyFunciton object
 
-                i += 1
-                continue
-
-        elif '^' in fmt[i]:
+        if '^' in fmt[i]:
             fmt[i] = fmt[i].replace('^', '**')
+            i += 1
+
+        match fmt[i]:
+            case '<乱数＞':
+                fmt[i] = generators.NumberGenerator(low = -25, high = 25)
+            case '＜計算記号＞':
+                fmt[i] = st.session_state.OperandGenerator
+            case '＜文字＞':
+                fmt[i] = char_gen.__next__()
+            case capture:
+                pass
+
+    return fmt
