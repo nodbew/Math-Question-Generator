@@ -1,6 +1,8 @@
 import sympy as sy
 import streamlit as st
 
+from . import generators
+
 class SettingViolation(Exception):pass
 
 def calculate_answer(evaluated_question):
@@ -43,32 +45,31 @@ def parse(input:str = None):
     result = result.replace("**", "^").replace('*', '').replace('I', 'i')
 
     return result
+        
+    
 
-def _evaluate(input:str):
-    """
-    Formats a string into evaluateable form.
-    """
-    # Default
+def format_evaluate(input:str = None) -> str:
     if input is None:
         input = st.session_state.input
     else:
         input = st.session_state[input]
 
-    # Check that there is at least one character to evaluate
     if input == []:
-        return ""
-        
+        return []
+
+    char_gen = generators.CharacterGenerator()
+
     value_str = ''.join(str(elem) for elem in input).replace('{', '(').replace('}', ')')
 
     # Check unterminated parenthesis
     if type(input[-1]) == int:
         value_str += ')'
 
-    # Replace the latex log function with a pythonic function styled str
-    value_str = re.sub(r'[\\]log_\((\d+?)\)*\((\d+?)\)', r'sy.log(\2, \1)', value_str)
-    
     # Replace degree with radian
     value_str = re.sub(r'(\d+)^{[\\]circ}', 'sy.rad(\1)', value_str)
+
+    # Replace the latex log function with a pythonic function styled str
+    value_str = re.sub(r'[\\]log_\((\d+?)\)*\((\d+?)\)', r'sy.log(\2, \1)', value_str)
         
     # Replace latex sqrt with math.sqrt function
     value_str = re.sub(r'[\\]sqrt\[2\]\((\d+?)\)', r'sy.sqrt(\1)', value_str)
@@ -79,28 +80,4 @@ def _evaluate(input:str):
     # Replace calculation signs
     value_str = value_str.replace(r'\times', '*').replace(r'\div', '/').replace('^', '**')
 
-    return value_str
-
-def evaluate(input = None):
-    '''
-    Raises an error with the streamlit style.
-    '''
-    value_str = _evaluate(input)
-
-    if value_str == '':
-        return ''
-        
-    try:
-         return eval(value_str, 
-                    {
-                        '__builtins__' : None, 
-                        'sy' : sy,
-                    },                         
-                    {
-                        'I' : sy.I # Imaginary
-                    } | st.session_state.current_template._characters[0]
-                )
-        
-    except SyntaxError as e:
-        st.error(f'無効な式です  \nエラー：Errored string:{value_str}  \nActual error message:{e}')
-        return
+    
