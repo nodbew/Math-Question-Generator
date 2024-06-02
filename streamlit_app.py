@@ -13,12 +13,8 @@ if 'settings' not in st.session_state:
     st.session_state.settings = init.settings()
 if 'OperandGenerator' not in st.session_state:
     st.session_state.OperandGenerator = init.operand_generator()
-if 'input' not in st.session_state:
-    st.session_state.input = []
 if 'format_input' not in st.session_state:
     st.session_state.format_input = []
-if 'input_keyboard' not in st.session_state:
-    st.session_state.input_keyboard = Keyboard(comp_init.default_keyboard())
 if 'format_input_keyboard' not in st.session_state:
     st.session_state.format_input_keybaord = Keyboard(comp_init.default_format_keyboard())
 if 'settings' not in st.session_state:
@@ -36,10 +32,8 @@ if 'current_template' not in st.session_state:
     st.session_state.current_template = st.session_state.templates['二次方程式の求解']
 if 'current_question' not in st.session_state:
     st.session_state.current_question = None # defined in main.main (in the first if-statement)
-if '_checked' not in st.session_state:
+if 'checked' not in st.session_state:
     st.session_state._checked = True
-if 'correct_count' not in st.session_state:
-    st.session_state.correct_count = 0
 if 'count' not in st.session_state:
     st.session_state.count = 0
 if 'start_time' not in st.session_state:
