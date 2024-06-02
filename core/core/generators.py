@@ -59,3 +59,20 @@ class CharacterGenerator(_BaseGenerator):
             self._subscript += 1
 
         return response
+
+class SympyFunction:
+    '''
+    A class that holds a sympy function and its arguments.
+    If an argument is callable, it will be replaced with the result of calling it.
+    '''
+    def __init__(self, sympy_func, *args, **kwargs):
+        self._func = sympy_func
+        self._args = args
+        self._kwargs = kwargs 
+        return
+
+    def __call__(self):
+        return self._func(
+            *[arg.__call__() if callable(arg) else arg for arg in self._args],
+            **{key:(value.__call__() if callable(value) else value) for key, value in self._kwargs.items()}
+        )
