@@ -66,18 +66,32 @@ def format_evaluate(input:str = None) -> str:
         value_str += ')'
 
     # Replace degree with radian
-    value_str = re.sub(r'(\d+)^{[\\]circ}', 'sy.rad(\1)', value_str)
+    value_str = re.sub(r'(\d+)^{[\\]circ}', 'sy.rad<\1>', value_str)
 
     # Replace the latex log function with a pythonic function styled str
-    value_str = re.sub(r'[\\]log_\((\d+?)\)*\((\d+?)\)', r'sy.log(\2, \1)', value_str)
+    value_str = re.sub(r'[\\]log_\((\d+?)\)*\((\d+?)\)', r'sy.log<\2, \1>', value_str)
         
     # Replace latex sqrt with math.sqrt function
-    value_str = re.sub(r'[\\]sqrt\[2\]\((\d+?)\)', r'sy.sqrt(\1)', value_str)
+    value_str = re.sub(r'[\\]sqrt\[2\]\((\d+?)\)', r'sy.sqrt<\1>', value_str)
 
     # Replace constants
     value_str = value_str.replace(r'\pi', 'sy.pi').replace('I', 'sy.I')
 
     # Replace calculation signs
-    value_str = value_str.replace(r'\times', '*').replace(r'\div', '/').replace('^', '**')
+    value_str = value_str.replace(r'\times', '*').replace(r'\div', '/')
 
-    
+    # Replace sympy functions with generator.SympyFunction object
+    value_str = re.sub(r'sy\.(.+?)<(.+?)>', r'generators.SympyFunction(sy.(\1), (\2))', value_str)
+
+    # Split with operands
+    i = 0
+    in_parenthesis = 0
+    fmt = re.split('([-+*/])', value_str)
+    while i < len(fmt):
+        if fmt[i].startswith('generators.SympyFunction('):
+            # generators.SympyFunction(sy.sin, (27) * (3)) -> ['generators.SympyFunction(sy.sin, (27)', '*', '(3))']
+            parenthesis = 
+            fmt[i] = fmt[i] + fmt[i + 1] + fmt[i + 2]
+            fmt[i + 1] = ''
+            fmt[i + 2] = ''
+        elif 
