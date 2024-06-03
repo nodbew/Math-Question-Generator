@@ -27,9 +27,6 @@ class Keyboard:
         Takes a dictionary of key_to_show:input_when_pressed
         Target should be a valid attribute of st.session_state
         """
-        if target not in st.session_state:
-            raise KeyError(f"st.session_state does not have a key {target}")
-
         self._col_num = col_num
         
         self._buttons = [ButtonPlaceHolder(
