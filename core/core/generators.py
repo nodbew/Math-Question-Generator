@@ -23,6 +23,9 @@ class OperandGenerator(_BaseGenerator):
     def __init__(self, operands = ['+', '-']):
         super().__init__(operands)
         return
+        
+    def __str__(self):
+        return "<計算記号>"
 
 class NumberGenerator(_BaseGenerator):
     '''
@@ -36,6 +39,9 @@ class NumberGenerator(_BaseGenerator):
 
     def __call__(self):
         return self._generator(low = self._low, high = self._high)
+
+    def __str__(self):
+        return "<乱数>"
 
 class CharacterGenerator(_BaseGenerator):
     '''
@@ -69,6 +75,12 @@ class SympyFunction:
         self._func = sympy_func
         self._args = args
         self._kwargs = kwargs 
+        
+        # Str to show
+        func = sympy_func.__name__ + "("
+        arg_str = ("{}," * len(args)).format(*args)
+        kwarg_str = str(f"{key} = {value}," for key, value in kwargs.items())
+        self._str = func + arg_str + kwarg_str[:-1] + ")"
         return
 
     def __call__(self):
@@ -76,3 +88,6 @@ class SympyFunction:
             *[arg.__call__() if callable(arg) else arg for arg in self._args],
             **{key:(value.__call__() if callable(value) else value) for key, value in self._kwargs.items()}
         )
+        
+    def __str__(self):
+        return self._str
