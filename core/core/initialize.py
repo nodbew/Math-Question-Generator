@@ -14,8 +14,7 @@ def operand_generator():
     return generators.OperandGenerator()
 
 def _flatten(iterable):
-    st.write(str(type(iterable)))
-    st.write(repr(iterable))
+    raise Exception(repr(iterable))
     for elem in iterable:
         if type(iterable) == list or type(iterable) == tuple:
             yield from _flatten(elem)
