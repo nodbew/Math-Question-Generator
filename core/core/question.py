@@ -84,5 +84,5 @@ class FactorizationQuestionFormat(QuestionFormat):
     '''
     def generate(self):
         question = super().generate()
-        self._answer = sy.factorize(question)
+        self._answer = sy.factor(question)
         return question
