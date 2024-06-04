@@ -38,7 +38,7 @@ def template():
     if st.button('追加'):
         try:
             match type_selectbox:
-                case '普通の問題':
+                case '文字式問題':
                     cls = question.QuestionFormat
                 case '展開問題':
                     cls = question.ExpansionQuestionFormat
@@ -47,7 +47,7 @@ def template():
                 case '整数問題':
                     cls = question.NumberQuestionFormat
                 case capture:
-                    st.error(f'内部エラーが発生しました;error during matching question type;  \ninvalid question type {type_selectbox} passed')
+                    st.error('内部エラーが発生しました;error during matching question type;  \ninvalid question type passed')
                     st.stop()
 
             # Check if the given question format is true
