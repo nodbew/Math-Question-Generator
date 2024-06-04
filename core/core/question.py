@@ -102,3 +102,28 @@ class FactorizationQuestionFormat(QuestionFormat):
         # Expand question
         question = sy.expand(question)
         return question
+
+class NumberQuestionFormat(QuestionFormat):
+    '''
+    A question format with only numbers.
+    '''
+    def __init__(self, fmt:list) -> None:
+        super().__init__(fmt)
+        self.QUESTION = '次の式を計算しなさい'
+        return
+
+    def generate(self) -> str:
+        for _ in range(50): # Recursion limit
+            # Create a question string
+            question = self._format.format(*[callable.__call__() for callable in callables])
+        
+            # Hold the answer for the question
+            try:
+                self._answer = answer.calculate_answer(eval(q), self._solve_char)
+            except answer.SettingViolation:
+                continue
+            else:
+                return question
+            
+        raise answer.RegulationError('条件に合う問題が見つかりませんでした  \n設定を変更するか、問題形式を変更してください')
+        
