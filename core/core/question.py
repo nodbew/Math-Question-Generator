@@ -16,7 +16,7 @@ class QuestionFormat:
         """
         assert type(fmt) == list
         
-        self._characters = {elem:sy.Symbol(elem) for elem in fmt if 97 <= ord(elem[0]) <= 122} # Extract alphabets from the list
+        self._characters = {elem:sy.Symbol(elem) for elem in fmt if (type(elem) == str and 97 <= ord(elem[0]) <= 122)} # Extract alphabets from the list
         self._callables = [elem for elem in fmt if callable(elem)] # Split callables from others
         self._format = "".join("{}" if callable(elem) else elem for elem in fmt) # Use str.format afterward
         return
