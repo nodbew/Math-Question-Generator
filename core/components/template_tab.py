@@ -33,20 +33,28 @@ def template():
         st.session_state.format_keyboard.place()
 
     name_input = st.text_input('問題形式の名前')
-    type_selectbox = st.selectbox(label = '問題の種類', options = ['普通の問題', '展開問題', '因数分解問題'])
+    type_selectbox = st.selectbox(label = '問題の種類', options = ['文字式問題', '展開問題', '因数分解問題','整数問題'])
     
     if st.button('追加'):
         try:
             match type_selectbox:
                 case '普通の問題':
-                    cls = question.QuestionTemplate
+                    cls = question.QuestionFormat
                 case '展開問題':
-                    cls = question.ExpansionQuestionTemplate
+                    cls = question.ExpansionQuestionFormat
                 case '因数分解問題':
-                    cls = question.FactorizationQuestionTemplate
+                    cls = question.FactorizationQuestionFormat
+                case '整数問題':
+                    cls = question.NumberQuestionFormat
                 case capture:
                     st.error('内部エラーが発生しました;error during matching question type:invalid question type passed')
                     st.stop()
+
+            # Check if the given question format is true
+            if '＜文字＞' not in st.session_state.format_input and type_selectbox != '整数問題':
+                cls = question.NumberQuestionFormat
+            elif '＜文字＞' in st.session_state.format_input and type_selectbox == '整数問題':
+                cls = question.QuestionFormat
                     
             st.session_state.templates[name] = cls(answer.format_evaluate('format_input'))
             
