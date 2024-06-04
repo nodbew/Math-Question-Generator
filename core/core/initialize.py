@@ -7,7 +7,7 @@ from . import question as question
 
 def settings():
     return {
-        '複素数解を許容する' : False
+        '複素数解を許容する' : True
     }
 
 def operand_generator():
