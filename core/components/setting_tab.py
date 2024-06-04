@@ -16,6 +16,6 @@ def setting():
                     value = value, 
                     key = 'setting_checkbox_' + name,
                     on_change = change_setting,
-                    args = (name,)')
+                    args = (name,))
                    )
     return
