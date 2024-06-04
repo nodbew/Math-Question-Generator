@@ -22,8 +22,10 @@ def main():
         # Generate another question
         st.session_state.current_question = st.session_state.current_template.generate()
 
+        st.session_state.checked = False
+
         if st.button('次へ'):
-            st.session_state.checked = False
+            st.rerun()
 
     else:
 
