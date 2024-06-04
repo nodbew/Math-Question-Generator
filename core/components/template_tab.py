@@ -8,6 +8,11 @@ Administration of question templates.
 
 def template():
     # Select template
+    def callback(selected):
+        st.session_state.current_template = st.session_state.templates[selected]
+        st.rerun()
+        return
+        
     st.header('問題形式の選択')
     options = list(st.session_state.templates.keys())
     template = st.selectbox(
@@ -15,7 +20,8 @@ def template():
         key = 'template_selectbox',
         options = options,
         index = options.index('二次方程式の求解'),
-        on_change = lambda:exec(f'st.session_state.current_template = st.session_state.templates["{template}"]')
+        on_change = callback,
+        args = (template,)
     )
 
     # Add template
