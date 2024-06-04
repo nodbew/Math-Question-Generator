@@ -62,7 +62,7 @@ class QuestionFormat:
         else:
             return False
 
-class ExpansionQuestionFormat:
+class ExpansionQuestionFormat(QuestionFormat):
     '''
     Answer calculation has one more step in this class, that is, expanding a polynomial formula.
     '''
@@ -71,7 +71,7 @@ class ExpansionQuestionFormat:
         self._answer = sy.expand(self._answer)
         return question
 
-class FactorizationQuestionFormat:
+class FactorizationQuestionFormat(QuestionFormat):
     '''
     Factorized formula will be the answer.
     '''
