@@ -15,8 +15,8 @@ if 'OperandGenerator' not in st.session_state:
     st.session_state.OperandGenerator = init.operand_generator()
 if 'format_input' not in st.session_state:
     st.session_state.format_input = []
-if 'format_input_keyboard' not in st.session_state:
-    st.session_state.format_keybaord = Keyboard(comp_init.default_format_keyboard())
+if 'format_keyboard' not in st.session_state:
+    st.session_state.format_keyboard = Keyboard(comp_init.default_format_keyboard())
 if 'settings' not in st.session_state:
     st.session_state.settings = init.settings()
 
