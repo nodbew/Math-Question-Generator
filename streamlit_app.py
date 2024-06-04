@@ -31,9 +31,9 @@ if 'templates' not in st.session_state:
 if 'current_template' not in st.session_state:
     st.session_state.current_template = st.session_state.templates['二次方程式の求解']
 if 'current_question' not in st.session_state:
-    st.session_state.current_question = None # defined in main.main (in the first if-statement)
+    st.session_state.current_question = st.session_state.current_template.generate()
 if 'checked' not in st.session_state:
-    st.session_state.checked = True
+    st.session_state.checked = False
 if 'count' not in st.session_state:
     st.session_state.count = 0
 if 'start_time' not in st.session_state:
