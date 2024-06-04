@@ -5,7 +5,7 @@ from . import generators
 
 class SettingViolation(Exception):pass
 
-def calculate_answer(evaluated_question, solve_char):
+def calculate_answer(evaluated_question):
     '''
     Takes number, sy.Expr or other valid question. The question should be evaluated, and should not be a str.
     Returns the answer for it.
@@ -19,11 +19,7 @@ def calculate_answer(evaluated_question, solve_char):
     else:
         # Sympy Expr
         # Answer and settings
-        if solve_char is None:
-            answers = sy.solve(evaluated_question)
-        else:
-            answers = sy.solve(evaluated_question, sy.Symbol('a'))
-            
+        answers = sy.solve(evaluated_question, sy.Symbol('a'))
         settings = st.session_state.settings
 
         # Complex answers
