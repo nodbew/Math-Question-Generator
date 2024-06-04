@@ -15,7 +15,7 @@ class ButtonPlaceHolder:
             return default
         
     def __bool__(self):
-        return st.button(*args, **kwargs)
+        return st.button(*self._args, **self._kwargs)
 
 class Keyboard:
     '''
