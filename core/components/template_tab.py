@@ -11,6 +11,7 @@ def template():
     def callback():
         selected = st.session_state['template_selectbox']
         st.session_state.current_template = st.session_state.templates[selected]
+        st.session_state.current_question = st.session_state.current_template.generate()
         st.rerun()
         return
         
