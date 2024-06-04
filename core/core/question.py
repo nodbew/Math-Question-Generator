@@ -69,6 +69,9 @@ class QuestionFormat:
         else:
             return False
 
+    def get_answers(self) -> list:
+        return self._answer
+
 class ExpansionQuestionFormat(QuestionFormat):
     '''
     Answer calculation has one more step in this class, that is, expanding a polynomial formula.
@@ -129,4 +132,7 @@ class NumberQuestionFormat(QuestionFormat):
                 return question
             
         raise answer.RegulationError('条件に合う問題が見つかりませんでした  \n設定を変更するか、問題形式を変更してください')
-        
+
+
+    def get_answers(self) -> list:
+        return [self._answer]
