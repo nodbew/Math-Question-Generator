@@ -47,7 +47,7 @@ def template():
                 case '整数問題':
                     cls = question.NumberQuestionFormat
                 case capture:
-                    st.error('内部エラーが発生しました;error during matching question type:invalid question type passed')
+                    st.error(f'内部エラーが発生しました;error during matching question type;  \ninvalid question type {type_selectbox} passed')
                     st.stop()
 
             # Check if the given question format is true
