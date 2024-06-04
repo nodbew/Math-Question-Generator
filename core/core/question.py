@@ -21,6 +21,7 @@ class QuestionFormat:
         self._format = "".join("{}" if callable(elem) else str(elem) for elem in fmt) # Use str.format afterward
 
         if len(self._characters) == 0:
+            self._solve_char = None
             self.QUESTION = 'この問題を解きなさい'
         else:
             self._solve_char = min(self._characters.keys(), key = ord)
@@ -51,7 +52,7 @@ class QuestionFormat:
         
             # Hold the answer for the question
             try:
-                self._answer = answer.calculate_answer(q)
+                self._answer = answer.calculate_answer(q, self._solve_char)
             except answer.SettingViolation:
                 continue
             else:
