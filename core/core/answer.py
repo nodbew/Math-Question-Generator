@@ -23,7 +23,6 @@ def calculate_answer(evaluated_question, solve_char):
 
         # Complex answers
         if not st.session_state.settings['複素数解を許容する']:
-            st.write('Complex not allowed')
             answers = [ans for ans in answers if ans.has(sy.I)]
             if len(answers) == 0:
                 raise SettingViolation('設定違反：虚数解')
