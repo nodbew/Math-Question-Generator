@@ -4,6 +4,7 @@ import streamlit as st
 from . import generators
 
 class SettingViolation(Exception):pass
+class RegulationError(Exception):pass
 
 def calculate_answer(evaluated_question, solve_char):
     '''
