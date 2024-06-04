@@ -8,7 +8,8 @@ Administration of question templates.
 
 def template():
     # Select template
-    def callback(selected):
+    def callback():
+        selected = st.session_state['template_selectbox']
         st.session_state.current_template = st.session_state.templates[selected]
         st.rerun()
         return
@@ -20,8 +21,7 @@ def template():
         key = 'template_selectbox',
         options = options,
         index = options.index('二次方程式の求解'),
-        on_change = callback,
-        args = (template,)
+        on_change = callback
     )
 
     # Add template
