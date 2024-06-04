@@ -75,7 +75,7 @@ class ExpansionQuestionFormat(QuestionFormat):
     '''
     def generate(self):
         question = super().generate()
-        self._answer = sy.expand(question)
+        self._answer = [sy.expand(question)]
         return question
 
 class FactorizationQuestionFormat(QuestionFormat):
@@ -84,5 +84,5 @@ class FactorizationQuestionFormat(QuestionFormat):
     '''
     def generate(self):
         question = super().generate()
-        self._answer = sy.factor(question)
+        self._answer = [sy.factor(question)]
         return question
