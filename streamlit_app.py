@@ -33,7 +33,7 @@ if 'current_template' not in st.session_state:
 if 'current_question' not in st.session_state:
     st.session_state.current_question = None # defined in main.main (in the first if-statement)
 if 'checked' not in st.session_state:
-    st.session_state._checked = True
+    st.session_state.checked = True
 if 'count' not in st.session_state:
     st.session_state.count = 0
 if 'start_time' not in st.session_state:
