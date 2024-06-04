@@ -19,6 +19,11 @@ class QuestionFormat:
         self._characters = {elem:sy.Symbol(elem) for elem in fmt if (type(elem) == str and 97 <= ord(elem[0]) <= 122)} # Extract alphabets from the list
         self._callables = [elem for elem in fmt if callable(elem)] # Split callables from others
         self._format = "".join("{}" if callable(elem) else str(elem) for elem in fmt) # Use str.format afterward
+
+        if len(self._characters) == 0:
+            self.QUESTION = 'この問題を解きなさい'
+        else:
+            self.QUESTION = f'この問題を{min(self._characters.keys(), key = ord)}について解きなさい'
         return
 
     @error_handler.error_handler
