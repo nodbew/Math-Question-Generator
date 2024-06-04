@@ -29,7 +29,7 @@ class QuestionFormat:
         return
 
     @error_handler.error_handler
-    def generate(self) -> str:
+    def generate(self) -> sy.Expr:
         '''
         Try to generate a question that fits the settings until it reaches the recursion limit.
         Recursion limit is set because it is hard to detect "ungenerateable" problems, and it is 50.
@@ -73,7 +73,12 @@ class ExpansionQuestionFormat(QuestionFormat):
     '''
     Answer calculation has one more step in this class, that is, expanding a polynomial formula.
     '''
-    def generate(self):
+    def __init__(self, fmt:list) -> None:
+        super().__init__(fmt)
+        self.QUESTION = '次の式を展開しなさい'
+        return
+        
+    def generate(self) -> sy.Expr:
         question = super().generate()
         self._answer = [sy.expand(question)]
         return question
@@ -82,7 +87,12 @@ class FactorizationQuestionFormat(QuestionFormat):
     '''
     Factorized formula will be the answer.
     '''
-    def generate(self):
+    def __init__(self, fmt:list) -> None:
+        super().__init__(fmt)
+        self.QUESTION = '次の式を因数分解しなさい'
+        return
+
+    def generate(self) -> sy.Expr:
         question = super().generate()
         self._answer = [sy.factor(question)]
         return question
