@@ -25,7 +25,7 @@ def template():
     with st.empty():
         st.session_state.format_keyboard.place()
 
-    name_input = st.input('問題形式の名前')
+    name_input = st.text_input('問題形式の名前')
     type_selectbox = st.selectbox(label = '問題の種類', options = ['普通の問題', '展開問題', '因数分解問題'])
     
     if st.button('追加'):
