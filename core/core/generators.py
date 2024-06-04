@@ -66,6 +66,9 @@ class CharacterGenerator(_BaseGenerator):
 
         return response
 
+    def __str__(self):
+        return '＜文字＞'
+
 class SympyFunction:
     '''
     A class that holds a sympy function and its arguments.
