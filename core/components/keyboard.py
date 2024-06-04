@@ -69,10 +69,12 @@ class Keyboard:
         '''
         Places the keyboard.
         '''
+        col_num = self._col_num
+        
         for i, col in enumerate(st.columns(col_num)):
-                buttons_to_use = self._buttons[i * col_num : (i + 1) * col_num]
-                with col:
-                    for i in buttons_to_use:
-                        if i:
-                            pass
+            buttons_to_use = self._buttons[i * col_num : (i + 1) * col_num]
+            with col:
+                for i in buttons_to_use:
+                    if i:
+                        pass
         return
