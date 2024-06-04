@@ -20,7 +20,10 @@ def main():
         st.session_state.count += 1
 
         # Generate another question
-        st.session_state.current_question = st.session_state.current_template.generate()
+        try:
+            st.session_state.current_question = st.session_state.current_template.generate()
+        except answer.RegulationError as e:
+            st.error(str(e))
 
         st.session_state.checked = False
 
