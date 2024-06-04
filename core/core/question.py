@@ -23,7 +23,8 @@ class QuestionFormat:
         if len(self._characters) == 0:
             self.QUESTION = 'この問題を解きなさい'
         else:
-            self.QUESTION = f'この問題を{min(self._characters.keys(), key = ord)}について解きなさい'
+            self._solve_char = min(self._characters.keys(), key = ord)
+            self.QUESTION = f'この問題を{self._solve_char}について解きなさい'
         return
 
     @error_handler.error_handler
