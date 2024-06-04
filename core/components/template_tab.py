@@ -15,7 +15,7 @@ def template():
         key = 'template_selectbox',
         options = options,
         index = options.index('二次方程式の求解'),
-        on_change = lambda:exec(f'st.session_state.current_template = st.session_state.templates[{template}]')
+        on_change = lambda:exec(f'st.session_state.current_template = st.session_state.templates["{template}"]')
     )
 
     # Add template
