@@ -113,6 +113,9 @@ class NumberQuestionFormat(QuestionFormat):
         return
 
     def generate(self) -> str:
+        callables = self._callables
+        characters = self._characters
+        
         for _ in range(50): # Recursion limit
             # Create a question string
             question = self._format.format(*[callable.__call__() for callable in callables])
