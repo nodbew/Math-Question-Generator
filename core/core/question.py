@@ -122,7 +122,7 @@ class NumberQuestionFormat(QuestionFormat):
         
             # Hold the answer for the question
             try:
-                self._answer = answer.calculate_answer(eval(q), self._solve_char)
+                self._answer = answer.calculate_answer(eval(question), self._solve_char)
             except answer.SettingViolation:
                 continue
             else:
