@@ -46,7 +46,7 @@ def default_format_keyboard():
     default = default_keyboard()
     character_generator = generators.CharacterGenerator()
     additional = {
-        '係数' : generators.NumberGenerator(),
+        '乱数' : generators.NumberGenerator(),
         '文字' : character_generator,
         '記号' : st.session_state.OperandGenerator,
     }
