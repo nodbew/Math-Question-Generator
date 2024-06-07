@@ -59,7 +59,7 @@ def template():
             elif '＜文字＞' in st.session_state.format_input and type_selectbox == '整数問題':
                 cls = question.QuestionFormat
                     
-            st.session_state.templates[name] = cls(answer.format_evaluate('format_input'))
+            st.session_state.templates[name_input] = cls(answer.format_evaluate('format_input'))
             
         except SyntaxError:
             st.error('無効な形式です  \nカッコを閉じ忘れたりしていませんか？')
