@@ -64,6 +64,8 @@ def template():
         except SyntaxError:
             st.error('無効な形式です  \nカッコを閉じ忘れたりしていませんか？')
 
+        st.rerun()
+
     # Delete template
     st.header('問題形式の削除')
     st.info('現在選択されている問題形式を削除します')
