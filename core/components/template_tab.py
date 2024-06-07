@@ -34,6 +34,9 @@ def template():
 
     name_input = st.text_input('問題形式の名前')
     type_selectbox = st.selectbox(label = '問題の種類', options = ['文字式問題', '展開問題', '因数分解問題','整数問題'])
+
+    if name_input in st.session_state.templates:
+        st.error('その名前はすでに使われています')
     
     if st.button('追加'):
         try:
