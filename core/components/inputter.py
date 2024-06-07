@@ -59,7 +59,7 @@ def callback(input:str, target:str):
     elif input == 'Back Space':
         def _callback():
             try:
-                st.session_state.pop(-1)
+                st.session_state[target].pop(-1)
             except IndexError:
                 pass
             return
