@@ -104,7 +104,6 @@ def format_evaluate(input:str = None) -> str:
 
         if '^' in fmt[i]:
             fmt[i] = fmt[i].replace('^', '**')
-            i += 1
 
         match fmt[i]:
             case '<乱数＞':
@@ -115,5 +114,7 @@ def format_evaluate(input:str = None) -> str:
                 fmt[i] = char_gen.__next__()
             case capture:
                 pass
+
+        i += 1
 
     return fmt
