@@ -109,8 +109,10 @@ def format_evaluate(input:str = None) -> str:
 
         fmt[i] = fmt[i].replace('<', '＜').replace('>', '＞')
 
-        match fmt[i]:
-            case '<乱数＞':
+        st.write(fmt[i])
+        
+        match fmt[i].strip():
+            case '＜乱数＞':
                 fmt[i] = generators.NumberGenerator(low = -25, high = 25)
             case '＜計算記号＞':
                 fmt[i] = st.session_state.OperandGenerator
