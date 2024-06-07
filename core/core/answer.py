@@ -107,6 +107,8 @@ def format_evaluate(input:str = None) -> str:
         if '^' in fmt[i]:
             fmt[i] = fmt[i].replace('^', '**')
 
+        fmt[i] = fmt[i].replace('<', '＜').replace('>', '＞')
+
         match fmt[i]:
             case '<乱数＞':
                 fmt[i] = generators.NumberGenerator(low = -25, high = 25)
