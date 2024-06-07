@@ -28,14 +28,14 @@ def template():
     )
 
     # Add template
-    st.header('問題形式の追加')
+    st.header('  \n問題形式の追加')
+    name_input = st.text_input('問題形式の名前')
+    type_selectbox = st.selectbox(label = '問題の種類', options = ['文字式問題', '展開問題', '因数分解問題','整数問題'])
+    
     st.write('$' + answer.parse('format_input') + '$')
   
     with st.empty():
         st.session_state.format_keyboard.place()
-
-    name_input = st.text_input('問題形式の名前')
-    type_selectbox = st.selectbox(label = '問題の種類', options = ['文字式問題', '展開問題', '因数分解問題','整数問題'])
 
     if name_input in st.session_state.templates:
         st.error('その名前はすでに使われています')
