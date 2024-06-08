@@ -70,13 +70,6 @@ def callback(input:str, target:str):
                 return
             return _callback
             
-        case '<乱数＞':
-            def _callback():
-                st.session_state[target].append(generators.NumberGenerator())
-                return
-            return _callback
-            
-        case '
         case capture:
             def _callback():
                 _input(input, target)
