@@ -27,6 +27,9 @@ class OperandGenerator(_BaseGenerator):
     def __str__(self):
         return "<計算記号>"
 
+    def __repr__(self):
+        return f'{self.__class__}({self._choices})'
+
 class NumberGenerator(_BaseGenerator):
     '''
     Generator object that returns a random integer within the given range.
@@ -42,6 +45,9 @@ class NumberGenerator(_BaseGenerator):
 
     def __str__(self):
         return "<乱数>"
+
+    def __repr__(self):
+        return f'{self.__class__}({self._low}, {self._high})'
 
 class CharacterGenerator(_BaseGenerator):
     '''
@@ -69,6 +75,9 @@ class CharacterGenerator(_BaseGenerator):
     def __str__(self):
         return '＜文字＞'
 
+    def __repr__(self):
+        return f'{self.__class__}()'
+
 class SympyFunction:
     '''
     A class that holds a sympy function and its arguments.
@@ -94,3 +103,6 @@ class SympyFunction:
         
     def __str__(self):
         return self._str
+
+    def __repr__(self):
+        return f'{self.__class__}(sy.{self._func.__name__}, *{self._args}, **{self._kwargs})'
