@@ -59,7 +59,7 @@ def format_evaluate(input:str = None) -> str:
     if input == []:
         return []
 
-    value_str = ''.join(str(elem) for elem in input).replace('{', '(').replace('}', ')')
+    value_str = ''.join(repr(elem) for elem in input).replace('{', '(').replace('}', ')')
 
     # Check unterminated parenthesis
     if type(input[-1]) == int:
