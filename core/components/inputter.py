@@ -8,7 +8,22 @@ def _input(input:str|int, target:str) -> None:
     Adds the input to st.session_state.*(Assigned in core.components.keyboard.Keyboard.__init__, when creating st.button)
     Numbers will be automatically concatenated.
     '''
-    if input in signs.BRACKETS:
+    if isinstance(input, generators.NumberGenerator):
+        st.session_state[target].append('{')
+        st.session_state[target].append(input)
+        st.session_state[target].append('}')
+        return
+        
+    elif isinstance(input, generators.OperandGenerator):
+        st.session_state[target].append(input)
+        return
+
+    elif isinstance(input, generators.SympyFunction):
+        st.session_state[target].append(input)
+        st.session_state[target].append('(')
+        return
+        
+    elif input in signs.BRACKETS:
         st.session_state[target].append(input)
         return
     
