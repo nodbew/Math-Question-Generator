@@ -34,7 +34,7 @@ class Keyboard:
             key = f'Key_{key}_at_keyboard_{id(self)}',
             on_click = inputter.callback(value, target),
             use_container_width = True
-                            ) for key, value in keys.items()]
+        ) for key, value in keys.items()]
         return
     
     def add_keys(self, keys:dict):
