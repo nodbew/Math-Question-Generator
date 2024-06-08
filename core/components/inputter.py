@@ -53,21 +53,32 @@ def callback(input:str, target:str):
     '''
     Takes an input and returns a callback function that appends the input to st.session_state.*
     '''
-    if input == 'All Clear':
-        def _callback():
-            st.session_state[target] = []
-            return
-        return _callback
-    elif input == 'Back Space':
-        def _callback():
-            try:
-                st.session_state[target].pop(-1)
-            except IndexError:
-                pass
-            return
-        return _callback
-    else:
-        def _callback():
-            _input(input, target)
-            return
-        return _callback
+    match input:
+    
+        case 'All Clear':
+            def _callback():
+                st.session_state[target] = []
+                return
+            return _callback
+            
+        case 'Back Space':
+            def _callback():
+                try:
+                    st.session_state[target].pop(-1)
+                except IndexError:
+                    pass
+                return
+            return _callback
+            
+        case '<乱数＞':
+            def _callback():
+                st.session_state[target].append(generators.NumberGenerator())
+                return
+            return _callback
+            
+        case '
+        case capture:
+            def _callback():
+                _input(input, target)
+                return
+            return _callback
