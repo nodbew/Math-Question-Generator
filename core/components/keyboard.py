@@ -41,7 +41,7 @@ class Keyboard:
         '''
         Adds the given keys to the keyboard.
         '''
-        new_buttons = [st.button(
+        new_buttons = [ButtonPlaceHolder(
             label = key,
             key = f'key_{key}_at_keyboard_{id(self)}',
             on_click = inputter.callback(value, target),
