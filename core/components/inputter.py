@@ -45,6 +45,8 @@ def _input(input:str|int, target:str) -> None:
             
         except IndexError:
             st.session_state[target].append(input)
+        finally:
+            st.session_state[target].append('{')
             return
 
 def callback(input:str, target:str):
