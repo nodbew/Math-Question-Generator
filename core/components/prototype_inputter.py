@@ -92,7 +92,6 @@ def input(input:str|int, target:str) -> None:
 
     # Other cases (constants, characters)
     else:
-        st.write('ur partly right')
         if st.session_state[target][-1] == 0:
             # See 'elif input in signs.FUNCTIONS' clause
             # FUNCTION{, a should not be converted into FUNCTION{ (0 * a)
@@ -108,6 +107,5 @@ def input(input:str|int, target:str) -> None:
             st.session_state[target].extend(['*', '{', input])
 
         else:
-            st.write('ur right')
             st.session_state[target].extend(['{', input])
             return
