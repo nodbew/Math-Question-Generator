@@ -116,8 +116,8 @@ def input(input:str|int, target:str) -> None:
         elif st.session_state[target][-1] == '}':
             st.session_state[target].extend(['*', '{', input])
 
-    else:
-        st.session_state[target].extend(['}', '*', '{', input])
-        return
+        else:
+            st.session_state[target].extend(['}', '*', '{', input])
+            return
 
     return
