@@ -72,7 +72,7 @@ class Keyboard:
         col_num = self._col_num
         
         for i, col in enumerate(st.columns(col_num)):
-            buttons_to_use = self._buttons[i * col_num ::self._col_num]
+            buttons_to_use = self._buttons[i::self._col_num]
             with col:
                 for i in buttons_to_use:
                     if i:
