@@ -97,7 +97,7 @@ def input(input:str|int, target:str) -> None:
             st.session_state[target].extend([input, '{', 0])
             return
 
-        elif st.session_state[target][-1] in (signs.CALCULATION_SIGNS + sings.BRACKETS):
+        elif st.session_state[target][-1] in (signs.CALCULATION_SIGNS + signs.BRACKETS):
             st.session_state[target].extend(['*', input, '{', 0])
 
         else:
