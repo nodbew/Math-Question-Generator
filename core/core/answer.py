@@ -112,19 +112,26 @@ def format_evaluate(input:str = None) -> list:
             fmt[i] = fmt[i].replace('^', '**')
 
         # Evaluate objects
-        if fmt[i].strip().startswith('generators.SympyFunction('):
-            fmt[i] = fmt[i].strip()
+        if fmt[i].strip().startswith('generators.SympyFunction'):
             
-            # generators.SympyFunction(sy.sin, (27) * (3)) -> ['generators.SympyFunction(sy.sin, (27)', '*', '(3))']
-            parenthesis = len(fmt[i]) - len(fmt[i].lstrip('(')) # Number of parenthesis
-            if not fmt[i].endswith(')'*parenthesis):
-                while not fmt[i + 1].endswith(')'*parenthesis) and i < len(fmt):
-                    fmt[i] += fmt.pop(i + 1)
+            # generators.SympyFunction (sy.sin, (27) * (3)) -> ['generators.SympyFunction(sy.sin, (27)', '*', '(3))']
+            j = i
+            parenthesis_count = 0
+            while fmt[j].strip() == '(':
+                if j == len(fmt):
+                    raise SyntaxError('Unterminated Parenthesis')
                     
-                fmt[i] = ''.join(fmt[i : j + 2])
-                fmt[i] = eval(fmt[i]) # generators.SympyFunciton object
+                j += 1 
+                parenthesis_count += 1 # Number of opening parenthesis
+                
+             while parenthesis_count != 0:
+                 j += 1
+                 if fmt[j].strip() == ')':
+                     parenthesis_count -= 1
+                
+            fmt[i] = eval(''.join(fmt[i : j + 1])) # generators.SympyFunciton object
 
-            i += 1
+            i = j + 1
             continue
 
         elif 
