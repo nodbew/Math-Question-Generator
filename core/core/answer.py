@@ -118,24 +118,16 @@ def format_evaluate(input:str = None) -> list:
             # generators.SympyFunction(sy.sin, (27) * (3)) -> ['generators.SympyFunction(sy.sin, (27)', '*', '(3))']
             parenthesis = len(fmt[i]) - len(fmt[i].lstrip('(')) # Number of parenthesis
             if not fmt[i].endswith(')'*parenthesis):
-                j = i
-                while not fmt[j].endswith(')'*parenthesis):
-                    j += 1
-                for _ in range(j):
+                while not fmt[i + 1].endswith(')'*parenthesis) and i < len(fmt):
                     fmt[i] += fmt.pop(i + 1)
-
+                    
+                fmt[i] = ''.join(fmt[i : j + 2])
                 fmt[i] = eval(fmt[i]) # generators.SympyFunciton object
 
             i += 1
             continue
 
-        try:
-            fmt[i] = eval(fmt[i], gl0bals, {})
-            i += 1
-            continue
-        except SyntaxError:
-            i += 1
-            continue
+        elif 
 
     raise Exception(fmt)
 
