@@ -14,6 +14,9 @@ def settings():
 def operator_generator():
     return generators.OperatorGenerator()
 
+def character_generator():
+    return generators.CharacterGenerator()
+
 def _flatten(iterable):
     for elem in iterable:
         if type(elem) == list or type(elem) == tuple:
