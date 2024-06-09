@@ -92,7 +92,16 @@ def input(input:str|int, target:str) -> None:
         return
 
     elif input in signs.FUNCTIONS:
-        st.session_state[target].extend([input, '{', 0]) # There will be a number or a constant 
+        if st.session_state[target] == 0:
+            st.session_state[target].pop(-1)
+            st.session_state[target].extend([input, '{', 0])
+            return
+
+        elif st.session_state[target][-1] in (signs.CALCULATION_SIGNS + sings.BRACKETS):
+            st.session_state[target].extend(['*', input, '{', 0])
+
+        else:
+            st.session_state[target].extend(['}', '*', input, '{', 0]) # There will be a number or a constant 
         return
 
     # Other cases (constants, characters)
@@ -114,3 +123,5 @@ def input(input:str|int, target:str) -> None:
         else:
             st.session_state[target].extend(['{', input])
             return
+
+    return
