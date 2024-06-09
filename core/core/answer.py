@@ -47,8 +47,6 @@ def parse(input:str = None):
     #result = result.replace("**", "^").replace('*', '').replace('I', 'i')
 
     return result
-        
-    
 
 def format_evaluate(input:str = None) -> str:
     if input is None:
