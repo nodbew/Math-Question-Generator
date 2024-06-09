@@ -44,7 +44,7 @@ def parse(input:str = None):
         input = st.session_state[input]
     
     result = " ".join(str(elem) for elem in input)
-    result = result.replace("**", "^").replace('*', '').replace('I', 'i')
+    #result = result.replace("**", "^").replace('*', '').replace('I', 'i')
 
     return result
         
