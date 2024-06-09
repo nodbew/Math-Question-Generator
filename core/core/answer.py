@@ -97,7 +97,7 @@ def format_evaluate(input:str = None) -> list:
         'SympyFunction' : generators.SympyFunction,
     }
     # Escapes made by generators.Generator.__repr__
-    cals_signs = {
+    calc_signs = {
         'ー' : '-',
         '＋' : '+',
         '＊' : '*',
