@@ -25,7 +25,7 @@ if 'templates' not in st.session_state:
         '二次方程式の求解' : init.polynomial_problem(),
         '二次方程式の展開' : question.ExpansionQuestionFormat(init.polynomial_problem(raw_format = True)),
         '二次方程式の因数分解' : question.FactorizationQuestionFormat(init.polynomial_problem(raw_format = True)),
-        '整数問題' : question.NumberQuestionFormat([generators.NumberGenerator(), st.session_state.OperandGenerator, generators.NumberGenerator()])
+        '整数問題' : question.NumberQuestionFormat([generators.NumberGenerator(), st.session_state.OperatorGenerator, generators.NumberGenerator()])
     }
     
 if 'current_template' not in st.session_state:
