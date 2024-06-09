@@ -88,7 +88,7 @@ def format_evaluate(input:str = None) -> list:
     
     # Split with operands
     i = 0
-    fmt = re.split('([-+*/])', value_str)
+    fmt = re.split('([-+*/()])', value_str)
     # For evaluating
     gl0bals = {
         'OperatorGenerator' : generators.OperatorGenerator,
