@@ -41,7 +41,7 @@ class NumberGenerator(_BaseGenerator):
         return
 
     def __call__(self):
-        return self._generator(low = self._low, high = self._high)
+        return int(self._generator(low = self._low, high = self._high))
 
     def __str__(self):
         return "<乱数>"
