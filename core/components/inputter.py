@@ -44,7 +44,7 @@ def _input(input:str|int, target:str) -> None:
                 if st.session_state[target][-1] not in ('.', '{'):
                     st.session_state[target].append('{')    
                 
-                if st.session_state[target][-1] not in signs.OPERANDS_AND_FUNCTIONS:
+                if st.session_state[target][-1] not in signs.OPERATORS_AND_FUNCTIONS:
                     st.session_state[target].append('*')    
                     
                 st.session_state[target].append(input)
