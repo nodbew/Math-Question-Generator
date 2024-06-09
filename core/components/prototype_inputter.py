@@ -112,16 +112,12 @@ def input(input:str|int, target:str) -> None:
             st.session_state[target].pop(-1)
             st.session_state[target].extend(['{', input])
             return
-            
-        elif isinstance(st.session_state[target][-1], int) or st.session_state[target][-1] in signs.CONSTANTS:
-            st.session_state[target].extend(['}', '*', '{', input])
-            return
 
         elif st.session_state[target][-1] == '}':
             st.session_state[target].extend(['*', '{', input])
 
-        else:
-            st.session_state[target].extend(['{', input])
-            return
+    else:
+        st.session_state[target].extend(['}', '*', '{', input])
+        return
 
     return
