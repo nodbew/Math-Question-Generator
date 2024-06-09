@@ -80,7 +80,12 @@ def input(input:str|int, target:str) -> None:
 
     # Other special cases
     if input in signs.CALCULATION_SIGNS or isinstance(input, generators.OperatorGenerator):
-        if isinstance(st.session_state[target][-1], int):
+        if st.session_state[target][-1] == 0:
+            st.session_state[target].pop(-1)
+            st.session_state[target].append(input)
+            return
+
+        elif st.session_state[target] not in (signs.CALCULATION_SIGNS + signs.BRACKETS):
             st.session_state[target].append('}')
 
         st.session_state[target].append(input)
