@@ -55,7 +55,7 @@ class NumberGenerator(_BaseGenerator):
         # In core.components.inputter, funciton 'input' splits this repr string by -.
         # This process adds m for minus numbers.
         if self._low < 0:
-            low = f'm{abs(self._low}'
+            low = f'm{abs(self._low)}'
         else:
             low = self._low
 
