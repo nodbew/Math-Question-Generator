@@ -35,11 +35,6 @@ class NumberGenerator(_BaseGenerator):
     Generator object that returns a random integer within the given range.
     '''
     def __init__(self, low:int = -25, high:int = 25):
-        if isinstance(low, str) and low.startswith('m'):
-            low = int(low[1:])
-        if isinstance(high, str) and high.startswith('m'):
-            high = int(high[1:])
-            
         self._low = low
         self._high = high + 1 # np.random.Generator.integers doesn't return high
         self._generator = np.random.default_rng().integers
@@ -52,20 +47,9 @@ class NumberGenerator(_BaseGenerator):
         return "<乱数>"
 
     def __repr__(self):
-        # In core.components.inputter, funciton 'input' splits this repr string by -.
-        # This process adds m for minus numbers.
-        if self._low < 0:
-            low = f'm{abs(self._low)}'
-        else:
-            low = self._low
-
-        if self._high - 1 < 0:
-            high = f'm{abs(self._high - 1)}'
-        else:
-            high = self._high
-
-        # repr
-        return f'{self.__class__.__name__}({low}, {high})'
+        string = f'{self.__class__.__name__}({low}, {high - 1})'
+        string = string.replace('-', 'ー')
+        return string
 
 class CharacterGenerator(_BaseGenerator):
     '''
@@ -123,4 +107,5 @@ class SympyFunction:
         return self._str
 
     def __repr__(self):
-        return f'{self.__class__.__name__}(sy.{self._func.__name__}, *{self._args}, **{self._kwargs})'
+        string = f'{self.__class__.__name__}(sy.{self._func.__name__}, *{self._args}, **{self._kwargs})'
+        return string.replace('-', 'ー').replace('+', '＋').replace('/', '＊').replace('*', '＊')
