@@ -117,17 +117,17 @@ def format_evaluate(input:str = None) -> list:
             # generators.SympyFunction (sy.sin, (27) * (3)) -> ['generators.SympyFunction(sy.sin, (27)', '*', '(3))']
             j = i
             parenthesis_count = 0
-            while fmt[j].strip() == '(':
-                if j == len(fmt):
-                    raise SyntaxError('Unterminated Parenthesis')
-                    
+            while j < len(fmt) and fmt[j].strip() == '(':                    
                 j += 1 
                 parenthesis_count += 1 # Number of opening parenthesis
                 
-            while parenthesis_count != 0:
+            while j < len(fmt) and parenthesis_count != 0:
                 j += 1
                 if fmt[j].strip() == ')':
                     parenthesis_count -= 1
+
+            if parenthesis_count != 0:
+                raise SyntaxError('Unterminated parenthesis')
                 
             fmt[i] = eval(''.join(fmt[i : j + 1])) # generators.SympyFunciton object
 
