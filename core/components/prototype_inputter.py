@@ -85,7 +85,7 @@ def input(input:str|int, target:str) -> None:
             st.session_state[target].append(input)
             return
 
-        elif st.session_state[target] not in (signs.CALCULATION_SIGNS + signs.BRACKETS):
+        elif st.session_state[target][-1] not in (signs.CALCULATION_SIGNS + signs.BRACKETS):
             st.session_state[target].append('}')
 
         st.session_state[target].append(input)
