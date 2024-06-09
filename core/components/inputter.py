@@ -9,7 +9,7 @@ def _input(input:str|int, target:str) -> None:
     Adds the input to st.session_state.*(Assigned in core.components.keyboard.Keyboard.__init__, when creating st.button)
     Numbers will be automatically concatenated.
     '''
-    if input == '＜文字＞':
+    if input == r'\Character':
         next = st.session_state.format_input_CharacterGenerator.__next__()
         st.session_state.format_keyboard.add_key({next:next})
         input = next
