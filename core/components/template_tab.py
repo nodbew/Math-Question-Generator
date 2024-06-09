@@ -12,6 +12,9 @@ def template():
         st.write(template._format)
     # Select template
     def callback():
+        # Allow * and / for number questions
+        if st.session_state.current_template.__class__ == question.NumberQuestionTemplate:
+            st.session_state.settings['乗除を含む問題を生成する'] = True
         selected = st.session_state['template_selectbox']
         st.session_state.current_template = st.session_state.templates[selected]
         st.session_state.current_question = st.session_state.current_template.generate()
