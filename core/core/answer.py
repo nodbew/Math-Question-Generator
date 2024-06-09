@@ -89,10 +89,25 @@ def format_evaluate(input:str = None) -> list:
     # Split with operands
     i = 0
     fmt = re.split('([-+*/])', value_str)
+    # For evaluating
+    gl0bals = {
+        'OperatorGenerator' : generators.OperatorGenerator,
+        'NumberGenerator' : generators.NumberGenerator,
+        'CharacterGenerator' : generators.CharacterGenerator,
+        'SympyFunction' : generators.SympyFunction,
+    }
+    # Escapes made by generators.Generator.__repr__
+    cals_signs = {
+        'ー' : '-',
+        '＋' : '+',
+        '＊' : '*',
+        '・' : '/',
+    }
     
     while i < len(fmt):
         # Organize
         fmt[i] = fmt[i].strip()
+        fmt[i] = fmt[i].translate(calc_signs)
         if '^' in fmt[i]:
             fmt[i] = fmt[i].replace('^', '**')
 
@@ -115,7 +130,7 @@ def format_evaluate(input:str = None) -> list:
             continue
 
         try:
-            fmt[i] = eval(fmt[i])
+            fmt[i] = eval(fmt[i], gl0bals, {})
             i += 1
             continue
         except SyntaxError:
