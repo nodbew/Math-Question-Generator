@@ -60,12 +60,16 @@ def _input(input:str|int, target:str) -> None:
             if isinstance(st.session_state[target][-1], int):
                 st.session_state[target].append('}')
                 st.session_state[target].append('*')   
+
+            else:
+                st.session_state[input].append('*')
                 
             st.session_state[target].append(input)
             return
             
         except IndexError:
             st.session_state[target].append(input)
+            
         finally:
             st.session_state[target].append('{')
             return
