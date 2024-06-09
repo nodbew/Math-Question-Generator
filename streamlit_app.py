@@ -12,7 +12,7 @@ from core.components.keyboard import Keyboard
 if 'settings' not in st.session_state:
     st.session_state.settings = init.settings()
 if 'OperandGenerator' not in st.session_state:
-    st.session_state.OperandGenerator = init.operand_generator()
+    st.session_state.OperatorGenerator = init.operator_generator()
 if 'format_input' not in st.session_state:
     st.session_state.format_input = []
 if 'format_keyboard' not in st.session_state:
