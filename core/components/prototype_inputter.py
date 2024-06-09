@@ -1,1 +1,2 @@
-def _input(input, target:str) -> None:
+def _input(input:str|int, target:str) -> None:
+    
