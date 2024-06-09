@@ -1,3 +1,8 @@
+import streamlit as st
+
+from ..core import generators
+from ..data import signs
+
 def _input(input:str|int, target:str) -> None:
     '''
     Adds the input to st.session_state[target](Assigned in core.components.keyboard.Keyboard.__init__, when creating st.button)
