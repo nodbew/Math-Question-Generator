@@ -28,7 +28,7 @@ class OperatorGenerator(_BaseGenerator):
         return "<計算記号>"
 
     def __repr__(self):
-        return f'{self.__class__}({self._choices})'
+        return f'{self.__class__.__name__}({self._choices})'
 
 class NumberGenerator(_BaseGenerator):
     '''
@@ -47,7 +47,7 @@ class NumberGenerator(_BaseGenerator):
         return "<乱数>"
 
     def __repr__(self):
-        return f'{self.__class__}({self._low}, {self._high})'
+        return f'{self.__class__.__name__}({self._low}, {self._high})'
 
 class CharacterGenerator(_BaseGenerator):
     '''
@@ -76,7 +76,7 @@ class CharacterGenerator(_BaseGenerator):
         return '＜文字＞'
 
     def __repr__(self):
-        return f'{self.__class__}()'
+        return f'{self.__class__.__name__}()'
 
 class SympyFunction:
     '''
@@ -105,4 +105,4 @@ class SympyFunction:
         return self._str
 
     def __repr__(self):
-        return f'{self.__class__}(sy.{self._func.__name__}, *{self._args}, **{self._kwargs})'
+        return f'{self.__class__.__name__}(sy.{self._func.__name__}, *{self._args}, **{self._kwargs})'
