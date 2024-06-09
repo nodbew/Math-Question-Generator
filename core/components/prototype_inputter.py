@@ -48,7 +48,7 @@ def input(input:str|int, target:str) -> None:
             st.session_state[target][-1] *= 10
             st.session_state[target][-1] += input
 
-        elif st.session_state[target][-1] in (signs.OPERATORS + ('{',)) or isinstance(st.session_state[target][-1], generators.OperatorGenerator):
+        elif st.session_state[target][-1] in (signs.CALCULATION_SIGNS + ('{',)) or isinstance(st.session_state[target][-1], generators.OperatorGenerator):
             st.session_state[target].extend(['{', input])
 
         # sin, (, 2π, ), 20 -> sin(2π)*{20
@@ -65,7 +65,7 @@ def input(input:str|int, target:str) -> None:
         pass # Input will be changed to an alphabet, but the function does not end its process instantly
         
     elif isinstance(input, generators.NumberGenerator):
-        if st.session_state[target][-1] in (signs.OPERATORS + ('{',)) or isinstance(st.session_state[target][-1], generators.OperatorGenerator):
+        if st.session_state[target][-1] in (signs.CALCULATION_SINGS + ('{',)) or isinstance(st.session_state[target][-1], generators.OperatorGenerator):
             st.session_state[target].extend(['{', input, '}'])
 
         # sin, (, 2π, ), 20 -> sin(2π)*{20
