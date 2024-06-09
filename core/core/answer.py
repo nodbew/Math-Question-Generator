@@ -85,7 +85,6 @@ def format_evaluate(input:str = None) -> str:
 
     # Split with operands
     i = 0
-    char_gen = generators.CharacterGenerator()
     fmt = re.split('([-+*/])', value_str)
     
     while i < len(fmt):
@@ -114,8 +113,6 @@ def format_evaluate(input:str = None) -> str:
                 fmt[i] = generators.NumberGenerator(low = -25, high = 25)
             case '＜計算記号＞':
                 fmt[i] = st.session_state.OperatorGenerator
-            case '＜文字＞':
-                fmt[i] = char_gen.__next__()
             case capture:
                 pass
 
