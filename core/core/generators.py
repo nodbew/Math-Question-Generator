@@ -59,8 +59,8 @@ class NumberGenerator(_BaseGenerator):
         else:
             low = self._low
 
-        if self._high < 0:
-            high = f'm{abs(self._high)}'
+        if self._high - 1 < 0:
+            high = f'm{abs(self._high - 1)}'
         else:
             high = self._high
 
