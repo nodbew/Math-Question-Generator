@@ -8,7 +8,7 @@ from . import question as question
 def settings():
     return {
         '複素数解を許容する' : True,
-        '乗除を含む問題を生成する' : True,
+        '乗除を含む問題を生成する' : False,
     }
 
 def operator_generator():
