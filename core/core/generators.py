@@ -47,7 +47,7 @@ class NumberGenerator(_BaseGenerator):
         return "<乱数>"
 
     def __repr__(self):
-        string = f'{self.__class__.__name__}({low}, {high - 1})'
+        string = f'{self.__class__.__name__}({self._low}, {self._high - 1})'
         string = string.replace('-', 'ー')
         return string
 
