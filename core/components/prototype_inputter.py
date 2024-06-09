@@ -25,8 +25,8 @@ def input(input:str|int, target:str) -> None:
             return
 
         if input in signs.BRACKETS:
-        st.session_state[target].append(input)
-        return
+            st.session_state[target].append(input)
+            return
 
         # Other special cases
         if input in signs.CALCULATION_SIGNS or isinstance(st.session_state[target][-1], generators.OperatorGenerator):
