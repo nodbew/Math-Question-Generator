@@ -60,7 +60,7 @@ def _change_to_str(input) -> str:
     value_str = ''.join(repr(elem) for elem in input).replace('{', '(').replace('}', ')')
 
     # Check unterminated parenthesis
-    if type(input[-1]) == int:
+    if input[-1] != '}':
         value_str += ')'
 
     # Replace degree with radian
