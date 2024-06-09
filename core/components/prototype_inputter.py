@@ -18,10 +18,23 @@ def _input(input:str|int, target:str) -> None:
         elif isinstance(input, generators.NumberGenerator):
             st.session_state[target].extend(['{', input, '}'])
             return
-        
-        elif isinstance(input, generators.OperatorGenerator):
+
+        if input in signs.BRACKETS:
+        st.session_state[target].append(input)
+        return
+
+        # Other special cases
+        if input in signs.CALCULATION_SIGNS or isinstance(st.session_state[target][-1], generators.OperatorGenerator):
             st.session_state[target].append(input)
             return
+
+        elif input in signs.FUNCTIONS:
+            st.session_state[target].extend([input, '{', 0]) # There will be a number or a constant 
+            return
+    
+        # Other cases (constants, characters)
+        else:
+            st.session_state[target].extend(['{', input])
 
     # The input is a number
     if isinstance(input, int):
@@ -30,7 +43,7 @@ def _input(input:str|int, target:str) -> None:
             st.session_state[target][-1] *= 10
             st.session_state[target][-1] += input
 
-        elif st.session_state[target] in (signs.OPERATORS + ('{',)):
+        elif st.session_state[target][-1] in (signs.OPERATORS + ('{',)) or isinstance(st.session_state[target][-1], generators.OperatorGenerator):
             st.session_state[target].extend(['{', input])
 
         # sin, (, 2π, ), 20 -> sin(2π)*{20
@@ -47,16 +60,12 @@ def _input(input:str|int, target:str) -> None:
         pass # Input will be changed to an alphabet, but the function does not end its process instantly
         
     elif isinstance(input, generators.NumberGenerator):
-        if st.session_state[target] in (signs.OPERATORS + ('{',)):
+        if st.session_state[target][-1] in (signs.OPERATORS + ('{',)) or isinstance(st.session_state[target][-1], generators.OperatorGenerator):
             st.session_state[target].extend(['{', input, '}'])
 
         # sin, (, 2π, ), 20 -> sin(2π)*{20
         else:
             st.session_state[target].extend(['*', '{', input, '}'])
-        return
-        
-    elif isinstance(input, generators.OperatorGenerator):
-        st.session_state[target].append(input)
         return
 
     # Special inputs for both format and normal input
@@ -64,8 +73,8 @@ def _input(input:str|int, target:str) -> None:
         st.session_state[target].append(input)
         return
 
-    # Other cases
-    if input in signs.CALCULATION_SYMBOLS:
+    # Other special cases
+    if input in signs.CALCULATION_SINGS or isinstance(st.session_state[target][-1], generators.OperatorGenerator):
         if isinstance(st.session_state[target][-1], int):
             st.session_state[target].append('}')
 
@@ -76,12 +85,13 @@ def _input(input:str|int, target:str) -> None:
         st.session_state[target].extend([input, '{', 0]) # There will be a number or a constant 
         return
 
+    # Other cases (constants, characters)
     else:
         if st.session_state[target][-1] == 0:
             # See 'elif input in signs.FUNCTIONS' clause
             # FUNCTION{, a should not be converted into FUNCTION{ (0 * a)
             st.session_state[target].pop(-1)
-            st.session_state[target].extend(['{', input, '}'])
+            st.session_state[target].extend(['{', input])
             return
             
         elif isinstance(st.session_state[target][-1], int) or st.session_state[target][-1] in signs.CONSTANTS:
