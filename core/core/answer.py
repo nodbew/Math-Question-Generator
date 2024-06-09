@@ -87,8 +87,6 @@ def format_evaluate(input:str = None) -> str:
     i = 0
     char_gen = generators.CharacterGenerator()
     fmt = re.split('([-+*/])', value_str)
-
-    raise Exception(fmt)
     
     while i < len(fmt):
         print(i)
@@ -122,5 +120,7 @@ def format_evaluate(input:str = None) -> str:
                 pass
 
         i += 1
+
+    raise Exception(fmt)
 
     return fmt
