@@ -79,7 +79,7 @@ def input(input:str|int, target:str) -> None:
         return
 
     # Other special cases
-    if input in signs.CALCULATION_SINGS or isinstance(input, generators.OperatorGenerator):
+    if input in signs.CALCULATION_SIGNS or isinstance(input, generators.OperatorGenerator):
         if isinstance(st.session_state[target][-1], int):
             st.session_state[target].append('}')
 
