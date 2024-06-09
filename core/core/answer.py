@@ -83,7 +83,7 @@ def _change_to_str(input) -> str:
 
     return value_str
 
-def format_eval(input:str = None) -> list:
+def format_evaluate(input:str = None) -> list:
     value_str = _change_to_str(input)
     
     # Split with operands
