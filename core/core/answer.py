@@ -48,7 +48,7 @@ def parse(input:str = None):
 
     return result
 
-def format_evaluate(input:str = None) -> str:
+def _change_to_str(input) -> str:
     if input is None:
         input = st.session_state.input
     else:
@@ -81,12 +81,22 @@ def format_evaluate(input:str = None) -> str:
     # Replace sympy functions with generator.SympyFunction object
     value_str = re.sub(r'sy\.(.+?)<(.+?)>', r'generators.SympyFunction(sy.(\1), (\2))', value_str)
 
+    return value_str
+
+def format_eval(input:str = None) -> list:
+    value_str = _change_to_str(input)
+    
     # Split with operands
     i = 0
     fmt = re.split('([-+*/])', value_str)
     
     while i < len(fmt):
-        print(i)
+        # Organize
+        fmt[i] = fmt[i].strip()
+        if '^' in fmt[i]:
+            fmt[i] = fmt[i].replace('^', '**')
+
+        # Evaluate objects
         if fmt[i].strip().startswith('generators.SympyFunction('):
             fmt[i] = fmt[i].strip()
             
@@ -101,20 +111,16 @@ def format_evaluate(input:str = None) -> str:
 
                 fmt[i] = eval(fmt[i]) # generators.SympyFunciton object
 
-        if '^' in fmt[i]:
-            fmt[i] = fmt[i].replace('^', '**')
+            i += 1
+            continue
 
-        fmt[i] = fmt[i].replace('<', '＜').replace('>', '＞')
-        
-        match fmt[i].strip():
-            case '＜乱数＞':
-                fmt[i] = generators.NumberGenerator(low = -25, high = 25)
-            case '＜計算記号＞':
-                fmt[i] = st.session_state.OperatorGenerator
-            case capture:
-                pass
-
-        i += 1
+        try:
+            fmt[i] = eval(fmt[i])
+            i += 1
+            continue
+        except SyntaxError:
+            i += 1
+            continue
 
     raise Exception(fmt)
 
