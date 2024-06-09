@@ -3,6 +3,7 @@ import streamlit as st
 
 from ..core import generators
 from ..data import signs
+from . import prototype_inputter as proto
 
 def _input(input:str|int, target:str) -> None:
     '''
@@ -97,6 +98,6 @@ def callback(input:str, target:str):
             
         case capture:
             def _callback():
-                _input(input, target)
+                proto.input(input, target)
                 return
             return _callback
