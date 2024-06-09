@@ -124,17 +124,15 @@ def format_evaluate(input:str = None) -> list:
                 j += 1 
                 parenthesis_count += 1 # Number of opening parenthesis
                 
-             while parenthesis_count != 0:
-                 j += 1
-                 if fmt[j].strip() == ')':
-                     parenthesis_count -= 1
+            while parenthesis_count != 0:
+                j += 1
+                if fmt[j].strip() == ')':
+                    parenthesis_count -= 1
                 
             fmt[i] = eval(''.join(fmt[i : j + 1])) # generators.SympyFunciton object
 
             i = j + 1
             continue
-
-        elif 
 
     raise Exception(fmt)
 
