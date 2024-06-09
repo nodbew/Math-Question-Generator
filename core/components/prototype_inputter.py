@@ -4,8 +4,6 @@ from ..core import generators
 from ..data import signs
 
 def input(input:str|int, target:str) -> None:
-    st.write(st.session_state[target])
-    st.write([type(elem) for elem in st.session_state[target]])
     '''
     Adds the input to st.session_state[target](Assigned in core.components.keyboard.Keyboard.__init__, when creating st.button)
     Numbers will be automatically concatenated.
@@ -109,5 +107,6 @@ def input(input:str|int, target:str) -> None:
             st.session_state[target].extend(['*', '{', input])
 
         else:
+            st.write('ur correct')
             st.session_state[target].extend(['{', input])
             return
