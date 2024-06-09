@@ -9,8 +9,6 @@ Administration of question templates.
 '''
 
 def template():
-    for template in st.session_state.templates.values():
-        st.write(template._format)
     # Select template
     def callback():
         # Allow * and / for number questions
