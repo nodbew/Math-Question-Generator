@@ -10,8 +10,8 @@ def settings():
         '複素数解を許容する' : True
     }
 
-def operand_generator():
-    return generators.OperandGenerator()
+def operator_generator():
+    return generators.OperatorGenerator()
 
 def _flatten(iterable):
     for elem in iterable:
