@@ -48,6 +48,6 @@ def default_format_keyboard():
     additional = {
         '乱数' : generators.NumberGenerator(),
         '文字' : character_generator,
-        '記号' : st.session_state.OperandGenerator,
+        '記号' : st.session_state.OperatorGenerator,
     }
     return default | additional
