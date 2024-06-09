@@ -16,7 +16,7 @@ class _BaseGenerator:
     def __next__(self):
         return self.__call__()
         
-class OperandGenerator(_BaseGenerator):
+class OperatorGenerator(_BaseGenerator):
     '''
     Generator object that returns a random operand from the given operands list.
     '''
