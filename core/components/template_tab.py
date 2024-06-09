@@ -2,6 +2,7 @@ import streamlit as st
 
 from ..core import answer
 from ..core import question
+from ..core import generators
 
 '''
 Administration of question templates.
@@ -65,6 +66,10 @@ def template():
                 cls = question.QuestionFormat
                     
             st.session_state.templates[name_input] = cls(answer.format_evaluate('format_input'))
+
+            # Initialization
+            st.session_state.format_input = []
+            st.session_state.format_input_CharacterGenerator = generators.CharacterGenerator()
             
         except SyntaxError:
             st.error('無効な形式です  \nカッコを閉じ忘れたりしていませんか？')
