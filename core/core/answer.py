@@ -113,7 +113,7 @@ def format_evaluate(input:str = None) -> str:
             case '＜乱数＞':
                 fmt[i] = generators.NumberGenerator(low = -25, high = 25)
             case '＜計算記号＞':
-                fmt[i] = st.session_state.OperandGenerator
+                fmt[i] = st.session_state.OperatorGenerator
             case '＜文字＞':
                 fmt[i] = char_gen.__next__()
             case capture:
