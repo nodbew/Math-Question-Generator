@@ -32,7 +32,6 @@ def default_keyboard():
         ')' : ("}"),
         '累乗' : ("^"),
         '0' : (0),
-        '.' : ("."),
         '=' : ("="),
         '＋' : ("+"), # Same as '-'
         ',' : ',',
@@ -44,6 +43,7 @@ def default_format_keyboard():
     Based on default_keyboard, adds some additional keys for creating QuestionFormat object.
     '''
     default = default_keyboard()
+    del default[',']
     additional = {
         '乱数' : generators.NumberGenerator(),
         '文字' : r'\Character',
