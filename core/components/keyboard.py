@@ -37,7 +37,7 @@ class Keyboard:
         ) for key, value in keys.items()]
         return
     
-    def add_keys(self, keys:dict):
+    def add_keys(self, keys:dict, target:str = 'input'):
         '''
         Adds the given keys to the keyboard.
         '''
