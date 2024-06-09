@@ -11,7 +11,7 @@ def _input(input:str|int, target:str) -> None:
     '''
     if input == r'\Character':
         next = st.session_state.format_input_CharacterGenerator.__next__()
-        st.session_state.format_keyboard.add_keys({next:next}, input = 'format_input')
+        st.session_state.format_keyboard.add_keys({next:next}, target = 'format_input')
         input = next
         
     elif isinstance(input, generators.NumberGenerator):
