@@ -120,12 +120,13 @@ def format_evaluate(input:str = None) -> list:
             if fmt[i + 1].strip() != '(':
                 raise SyntaxError('関数の直後にはカッコが必要です')
 
-            closing_parenthesis = fmt[i + 2:].find(')')
-            if closing_parenthesis == -1:
+            if ')' not in fmt[i + 2:]:
                 raise SyntaxError('カッコが閉じられていません')
+                
             else:
-                fmt[i] = ''.join(fmt[i : closing_parenthesis + 1])
-                fmt = fmt[:i + 1] + fmt[closing_parenthesis + 1:]
+                closing_parenthesis = fmt[i + 2:].index(')')
+                fmt[i] = ''.join(fmt[i : i + closing_parenthesis + 3])
+                fmt = fmt[:i + 1] + fmt[i + closing_parenthesis + 3:]
                 
             fmt[i] = eval(fmt[i], gl0bals, {}) # generators.Generator object
 
