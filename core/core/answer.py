@@ -115,27 +115,19 @@ def format_evaluate(input:str = None) -> list:
             fmt[i] = fmt[i].replace('^', '**')
 
         # Evaluate objects
-        if fmt[i] in ('OperatorGenerator', 'NumberGenerator', 'CharacterGenerator', 'SympyFunction'):
-            
-            # generators.SympyFunction (sy.sin, (27) * (3)) -> ['generators.SympyFunction(sy.sin, (27)', '*', '(3))']
-            j = i
-            parenthesis_count = 0
-            while j < len(fmt) and fmt[j].strip() == '(':                    
-                j += 1 
-                parenthesis_count += 1 # Number of opening parenthesis
-                
-            while j < len(fmt) and parenthesis_count != 0:
-                j += 1
-                if fmt[j].strip() == ')':
-                    parenthesis_count -= 1
+        if fmt[i] in (signs.FUNCITONS + ('OperatorGenerator', 'NumberGenerator', 'CharacterGenerator', 'SympyFunction')):
 
-            if parenthesis_count != 0:
-                raise SyntaxError('Unterminated parenthesis')
-                
-            fmt[i] = eval(''.join(fmt[i : j + 1]), gl0bals, {}) # generators.Generator object
+            if fmt[i + 1].strip() != '(':
+                raise SyntaxError('関数の直後にはカッコが必要です')
 
-            i = j + 1
-            continue
+            closing_parenthesis = fmt[i + 2:].find(')')
+            if closing_parenthesis == -1:
+                raise SyntaxError('カッコが閉じられていません')
+            else:
+                fmt[i] = ''.join(fmt[i : closing_parenthesis + 1])
+                fmt = fmt[:i + 1] + fmt[closing_parenthesis + 1:]
+                
+            fmt[i] = eval(fmt[i], gl0bals, {}) # generators.Generator object
 
         i += 1
         continue
