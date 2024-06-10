@@ -70,8 +70,7 @@ def template():
             # Initialization
             st.session_state.format_input = []
             st.session_state.format_input_CharacterGenerator = generators.CharacterGenerator()
-            fmt = init.default_format_keyboard() | st.session_state.current_template._symbols
-            st.session_state.format_keyboard = Keyboard(fmt)
+            st.session_state.format_keyboard = Keyboard(init.default_format_keyboard())
             
         except SyntaxError:
             st.error('無効な形式です  \nカッコを閉じ忘れたりしていませんか？')
