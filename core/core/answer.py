@@ -106,9 +106,8 @@ def format_evaluate(input:str = None) -> list:
         '＊' : '*',
         '・' : '/',
     }
-    st.write(fmt)
+
     while i < len(fmt):
-        st.write(fmt[i])
         # Organize
         fmt[i] = fmt[i].strip()
         fmt[i] = fmt[i].translate(calc_signs)
@@ -116,7 +115,7 @@ def format_evaluate(input:str = None) -> list:
             fmt[i] = fmt[i].replace('^', '**')
 
         # Evaluate objects
-        if fmt[i] in (signs.FUNCITONS + ('OperatorGenerator', 'NumberGenerator', 'CharacterGenerator', 'SympyFunction')):
+        if fmt[i] in (signs.FUNCTIONS + ('OperatorGenerator', 'NumberGenerator', 'CharacterGenerator', 'SympyFunction')):
 
             if fmt[i + 1].strip() != '(':
                 raise SyntaxError('関数の直後にはカッコが必要です')
