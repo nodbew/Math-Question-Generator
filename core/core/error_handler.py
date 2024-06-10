@@ -1,7 +1,9 @@
+from functools import wraps
+
 import streamlit as st
 
 def error_handler(func):
-    
+    @wraps(func)
     def _wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
