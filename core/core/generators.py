@@ -77,11 +77,29 @@ class CharacterGenerator(_BaseGenerator):
             response = chr(self._current_ord) + '_' + str(self._subscript)
             
         self._current_ord += 1
+        
         if self._current_ord == 123: # ord('z') == 122
             self._current_ord = 97
             self._subscript += 1
 
         return response
+
+    def generated(self):
+        subscript = 0
+        ord = 97
+        for _ in range(26 * self._subscript + self._current_ord):
+            if subscript == 0:
+                response = chr(ord)
+            else:
+                response = chr(ord) + '_' + str(subscript)
+            
+            ord += 1
+            
+            if ord == 123: # ord('z') == 122
+                ord = 97
+                subscript += 1
+
+            yield response
 
     def __str__(self):
         return '＜文字＞'
