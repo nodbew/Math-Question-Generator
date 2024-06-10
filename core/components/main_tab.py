@@ -15,7 +15,11 @@ def main():
 
     if st.session_state.checked:
         # Answer checking(also used for initialization)
-        st.write('正解は ' + '$' + ", ".join(sy.latex(ans) for ans in st.session_state.current_template.get_answers()) + '$')
+        if st.session_state.current_template.check_answer(answer.evaluate("input")):
+            st.success('正解!正答は ' + '$' + ", ".join(sy.latex(ans) for ans in st.session_state.current_template.get_answers()) + '$')
+            st.session_state.correct_count += 1
+        else:
+            st.success('不正解...!正解は ' + '$' + ", ".join(sy.latex(ans) for ans in st.session_state.current_template.get_answers()) + '$')
 
         st.session_state.count += 1
 
