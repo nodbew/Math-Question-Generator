@@ -30,12 +30,12 @@ def default_keyboard():
         'ー' : ("-"), # ASCII '-' not displayed properly??
         '(' : ("{"),
         ')' : ("}"),
+        '°' : r'^{\circ}',
         '累乗' : ("^"),
         '0' : (0),
         '=' : ("="),
         '＋' : ("+"), # Same as '-'
         ',' : ',',
-        '°' : r'^{\circ}'
     }
 
 def default_format_keyboard():
