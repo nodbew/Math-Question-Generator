@@ -87,8 +87,7 @@ def _change_to_str(input) -> str:
 
     return value_str
 
-@error_handler
-def format_evaluate(input:str = None) -> list:
+def _evaluate(input:str = None) -> list:
     value_str = _change_to_str(input)
     
     # Split with operands
@@ -130,3 +129,6 @@ def format_evaluate(input:str = None) -> list:
         continue
 
     return fmt
+    
+@error_handler
+def format_evaluate(input:str = None) -> list:
