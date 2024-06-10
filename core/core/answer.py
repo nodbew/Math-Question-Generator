@@ -160,7 +160,7 @@ def evaluate(input:str = None) -> list:
                 fmt[i] = ''.join(fmt[i : i + closing_parenthesis + 3]).replace('ー', '-').replace('＋', '+').replace('＊', '*').replace('・', '/')
                 fmt = fmt[:i + 1] + fmt[i + closing_parenthesis + 3:]
 
-            fmt[i] = eval(fmt[i], gl0bals, {}) # generators.Generator object
+            fmt[i] = eval(fmt[i], {__builtins__:None, "sy":sy}, {}) # generators.Generator object
 
         i += 1
         continue
