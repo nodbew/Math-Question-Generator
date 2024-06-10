@@ -88,5 +88,6 @@ def template():
                 
         del st.session_state.current_template
         st.session_state.current_template = list(st.session_state.templates.values())[0]
+        st.rerun()
     
     return
