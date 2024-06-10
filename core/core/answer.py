@@ -99,18 +99,11 @@ def format_evaluate(input:str = None) -> list:
         'CharacterGenerator' : generators.CharacterGenerator,
         'SympyFunction' : generators.SympyFunction,
     }
-    # Escapes made by generators.Generator.__repr__
-    calc_signs = {
-        'ー' : '-',
-        '＋' : '+',
-        '＊' : '*',
-        '・' : '/',
-    }
 
     while i < len(fmt):
         # Organize
         fmt[i] = fmt[i].strip()
-        fmt[i] = fmt[i].translate(calc_signs)
+        fmt[i] = fmt[i].replace('ー', '-').replace('＋', '+').replace('＊', '*').replace('・', '/')
         if '^' in fmt[i]:
             fmt[i] = fmt[i].replace('^', '**')
 
@@ -125,7 +118,7 @@ def format_evaluate(input:str = None) -> list:
                 
             else:
                 closing_parenthesis = fmt[i + 2:].index(')')
-                fmt[i] = ''.join(fmt[i : i + closing_parenthesis + 3]).translate(calc_signs)
+                fmt[i] = ''.join(fmt[i : i + closing_parenthesis + 3]).replace('ー', '-').replace('＋', '+').replace('＊', '*').replace('・', '/')
                 fmt = fmt[:i + 1] + fmt[i + closing_parenthesis + 3:]
 
             st.write(fmt[i])
