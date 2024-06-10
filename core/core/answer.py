@@ -123,7 +123,6 @@ def format_evaluate(input:str = None) -> list:
                 fmt[i] = ''.join(fmt[i : i + closing_parenthesis + 3]).replace('ー', '-').replace('＋', '+').replace('＊', '*').replace('・', '/')
                 fmt = fmt[:i + 1] + fmt[i + closing_parenthesis + 3:]
 
-            st.write(fmt[i])
             fmt[i] = eval(fmt[i], gl0bals, {}) # generators.Generator object
 
         i += 1
