@@ -95,6 +95,8 @@ def format_evaluate(input:str = None) -> list:
     i = 0
     fmt = re.split('([-+*/()])', value_str)
     # For evaluating
+    generated = st.session_state.format_input_CharacterGenerator.generated()
+    l0cals = {i:sy.Symbol(i) for i in generated}
     gl0bals = {
         'OperatorGenerator' : generators.OperatorGenerator,
         'NumberGenerator' : generators.NumberGenerator,
@@ -123,7 +125,7 @@ def format_evaluate(input:str = None) -> list:
                 fmt[i] = ''.join(fmt[i : i + closing_parenthesis + 3]).replace('ー', '-').replace('＋', '+').replace('＊', '*').replace('・', '/')
                 fmt = fmt[:i + 1] + fmt[i + closing_parenthesis + 3:]
 
-            fmt[i] = eval(fmt[i], gl0bals, {}) # generators.Generator object
+            fmt[i] = eval(fmt[i], gl0bals, l0cals) # generators.Generator object
 
         i += 1
         continue
