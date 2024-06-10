@@ -49,14 +49,15 @@ def parse(input:str = None):
     return result
 
 def _change_to_str(input) -> str:
-    st.write(input)
     if input is None:
         input = st.session_state.input
     else:
         input = st.session_state[input]
 
     if input == []:
-        return []
+        return ''
+
+    st.write(input)
 
     value_str = ''.join(elem if isinstance(elem, str) else repr(elem) for elem in input).replace('{', '(').replace('}', ')')
 
