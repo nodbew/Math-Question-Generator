@@ -57,7 +57,7 @@ def _change_to_str(input) -> str:
     if input == []:
         return []
 
-    value_str = ''.join(repr(elem) for elem in input).replace('{', '(').replace('}', ')')
+    value_str = ''.join(elem if isinstance(elem, str) else repr(elem) for elem in input).replace('{', '(').replace('}', ')')
 
     # Check unterminated parenthesis
     if input[-1] != '}':
