@@ -126,7 +126,7 @@ def format_evaluate(input:str = None) -> list:
                 fmt = fmt[:i + 1] + fmt[i + closing_parenthesis + 3:]
 
             st.write(fmt[i])
-            fmt[i] = eval(fmt[i], gl0bals, {}) # generators.Generator object
+            fmt[i] = eval(fmt[i], gl0bals, l0cals) # generators.Generator object
 
         i += 1
         continue
@@ -136,4 +136,4 @@ def format_evaluate(input:str = None) -> list:
 @error_handler
 def evaluate(input:str = None) -> sy.Expr:
     value_str = _change_to_str(input)
-    return eval(value_str, {"__builtins__":None, "sy":sy}, {
+    return eval(value_str, {"__builtins__":None, "sy":sy}, st.session_state.current_template._characters)
