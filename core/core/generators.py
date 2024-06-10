@@ -23,6 +23,13 @@ class OperatorGenerator(_BaseGenerator):
     def __init__(self, operands = ['+', '-']):
         super().__init__(operands)
         return
+
+    def __call__(self):
+        if st.session_state.settings['乗除を含む問題を生成する']:
+            self._choices.extend(['*', '/'])
+        if st.session_state.settings['累乗を含む問題を生成する']:
+            self._choices.append('**')
+        return random.choice(self._choices)
         
     def __str__(self):
         return "<計算記号>"
