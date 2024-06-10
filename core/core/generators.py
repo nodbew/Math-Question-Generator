@@ -88,6 +88,20 @@ class CharacterGenerator(_BaseGenerator):
 
     def __repr__(self):
         return f'{self.__class__.__name__}()'
+        
+    def generated(self):
+        for _ in range(self._subscript * 26 + self._current_ord):
+            if self._subscript == 0:
+                response = chr(self._current_ord)
+            else:
+                response = chr(self._current_ord) + '_' + str(self._subscript)
+            
+            self._current_ord += 1
+            if self._current_ord == 123: # ord('z') == 122
+                self._current_ord = 97
+                self._subscript += 1
+                
+            yield response
 
 class SympyFunction:
     '''
