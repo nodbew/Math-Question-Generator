@@ -49,6 +49,7 @@ def parse(input:str = None):
     return result
 
 def _change_to_str(input) -> str:
+    st.write(input)
     if input is None:
         input = st.session_state.input
     else:
