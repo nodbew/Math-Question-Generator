@@ -5,6 +5,7 @@ import streamlit as st
 
 from . import generators
 from ..data import signs
+from .error_handler import error_handler
 
 class SettingViolation(Exception):pass
 class RegulationError(Exception):pass
@@ -86,6 +87,7 @@ def _change_to_str(input) -> str:
 
     return value_str
 
+@error_handler
 def format_evaluate(input:str = None) -> list:
     value_str = _change_to_str(input)
     
