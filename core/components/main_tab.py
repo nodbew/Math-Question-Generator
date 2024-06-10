@@ -2,6 +2,7 @@ import streamlit as st
 import sympy as sy
 
 from ..core import answer
+from . import initialize as init
 
 '''
 Main tab that shows a question and awaits an answer.
@@ -23,6 +24,14 @@ def main():
             st.session_state.current_question = st.session_state.current_template.generate()
         except answer.RegulationError as e:
             st.error(str(e))
+            
+        # Initialize input
+        st.session_state.input = []
+        st.session_state.input_keyboard = Keyboard(
+        init.default_keyabord() | {
+        c:c for c in st.session_state.current_template._characters.keys()
+        }
+        )
 
         st.session_state.checked = False
         
