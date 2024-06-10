@@ -90,16 +90,18 @@ class CharacterGenerator(_BaseGenerator):
         return f'{self.__class__.__name__}()'
         
     def generated(self):
+        current_ord = 97
+        subscript = 0
         for _ in range(self._subscript * 26 + self._current_ord):
-            if self._subscript == 0:
-                response = chr(self._current_ord)
+            if subscript == 0:
+                response = chr(current_ord)
             else:
-                response = chr(self._current_ord) + '_' + str(self._subscript)
+                response = chr(current_ord) + '_' + str(subscript)
             
-            self._current_ord += 1
-            if self._current_ord == 123: # ord('z') == 122
-                self._current_ord = 97
-                self._subscript += 1
+            current_ord += 1
+            if current_ord == 123: # ord('z') == 122
+                current_ord = 97
+                subscript += 1
                 
             yield response
 
