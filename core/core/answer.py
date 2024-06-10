@@ -95,6 +95,8 @@ def format_evaluate(input:str = None) -> list:
     i = 0
     fmt = re.split('([-+*/()])', value_str)
     # For evaluating
+    generated = st.session_state.format_input_CharacterGenerator.generated()
+    l0cals = {i:sy.Symbol(i) for i in generated}
     gl0bals = {
         'OperatorGenerator' : generators.OperatorGenerator,
         'NumberGenerator' : generators.NumberGenerator,
@@ -132,37 +134,6 @@ def format_evaluate(input:str = None) -> list:
     return fmt
 
 @error_handler
-def evaluate(input:str = None) -> list:
+def evaluate(input:str = None) -> sy.Expr:
     value_str = _change_to_str(input)
-    
-    # Split with operands
-    i = 0
-    fmt = re.split('([-+*/()])', value_str)
-
-    while i < len(fmt):
-        # Organize
-        fmt[i] = fmt[i].strip()
-        fmt[i] = fmt[i].replace('ー', '-').replace('＋', '+').replace('＊', '*').replace('・', '/')
-        if '^' in fmt[i]:
-            fmt[i] = fmt[i].replace('^', '**')
-
-        # Evaluate objects
-        if fmt[i] in signs.FUNCTIONS:
-
-            if fmt[i + 1].strip() != '(':
-                raise SyntaxError('関数の直後にはカッコが必要です')
-
-            if ')' not in fmt[i + 2:]:
-                raise SyntaxError('カッコが閉じられていません')
-                
-            else:
-                closing_parenthesis = fmt[i + 2:].index(')')
-                fmt[i] = ''.join(fmt[i : i + closing_parenthesis + 3]).replace('ー', '-').replace('＋', '+').replace('＊', '*').replace('・', '/')
-                fmt = fmt[:i + 1] + fmt[i + closing_parenthesis + 3:]
-
-            fmt[i] = eval(fmt[i], {__builtins__:None, "sy":sy}, {}) # generators.Generator object
-
-        i += 1
-        continue
-
-    return fmt
+    return eval(value_str, {"__builtins__":None, "sy":sy}, {
