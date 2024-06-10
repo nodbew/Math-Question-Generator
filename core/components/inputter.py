@@ -4,25 +4,25 @@ from ..core import generators
 from ..data import signs
 
 def _input(input:str|int, target:str) -> None:
-    st.write('input function called')
     '''
     Adds the input to st.session_state[target](Assigned in core.components.keyboard.Keyboard.__init__, when creating st.button)
     Numbers will be automatically concatenated.
     '''
     # If this is the first input
     if len(st.session_state[target]) == 0:
-        if isinstance(input, int):
-            st.session_state[target].extend(['{', input])
-            return
 
         if input in signs.BRACKETS:
             st.session_state[target].append(input)
+            return
+        
+        if isinstance(input, int):
+            st.session_state[target].extend(['{', input])
             return
             
         elif input == r'\Character':
             next = st.session_state.format_input_CharacterGenerator.__next__()
             st.session_state.format_keyboard.add_keys({next:next}, target = 'format_input')
-            st.session_state[target].extend(['{', input, '}'])
+            input = next
             pass # Input will be changed to an alphabet, but the function does not end its process instantly
         
         elif isinstance(input, generators.NumberGenerator):
