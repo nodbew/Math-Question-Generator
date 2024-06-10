@@ -129,7 +129,7 @@ def format_evaluate(input:str = None) -> list:
                 fmt = fmt[:i + 1] + fmt[i + closing_parenthesis + 3:]
 
             st.write(fmt[i])
-            st.write({ord(k):v for k, v in calc_sings.items()})
+            st.write({ord(k):v for k, v in calc_signs.items()})
             st.write([ord(c) for c in fmt[i]])
             fmt[i] = eval(fmt[i], gl0bals, {}) # generators.Generator object
 
