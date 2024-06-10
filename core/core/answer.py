@@ -50,7 +50,7 @@ def parse(input:str = None):
 
     return result
 
-def _change_to_str(input) -> str:
+def _convert_to_str(input) -> str:
     if input is None:
         input = st.session_state.input
     else:
@@ -89,7 +89,7 @@ def _change_to_str(input) -> str:
 
 @error_handler
 def format_evaluate(input:str = None) -> list:
-    value_str = _change_to_str(input)
+    value_str = _convert_to_str(input)
     
     # Split with operands
     i = 0
@@ -135,5 +135,5 @@ def format_evaluate(input:str = None) -> list:
 
 @error_handler
 def evaluate(input:str = None) -> sy.Expr:
-    value_str = _change_to_str(input)
+    value_str = _convert_to_str(input)
     return eval(value_str, {"__builtins__":None, "sy":sy}, st.session_state.current_template._characters)
