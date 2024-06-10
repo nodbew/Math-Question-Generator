@@ -87,7 +87,8 @@ def _change_to_str(input) -> str:
 
     return value_str
 
-def _evaluate(input:str = None) -> list:
+@error_handler
+def format_evaluate(input:str = None) -> list:
     value_str = _change_to_str(input)
     
     # Split with operands
@@ -129,6 +130,39 @@ def _evaluate(input:str = None) -> list:
         continue
 
     return fmt
-    
+
 @error_handler
-def format_evaluate(input:str = None) -> list:
+def evaluate(input:str = None) -> list:
+    value_str = _change_to_str(input)
+    
+    # Split with operands
+    i = 0
+    fmt = re.split('([-+*/()])', value_str)
+
+    while i < len(fmt):
+        # Organize
+        fmt[i] = fmt[i].strip()
+        fmt[i] = fmt[i].replace('ー', '-').replace('＋', '+').replace('＊', '*').replace('・', '/')
+        if '^' in fmt[i]:
+            fmt[i] = fmt[i].replace('^', '**')
+
+        # Evaluate objects
+        if fmt[i] in signs.FUNCTIONS:
+
+            if fmt[i + 1].strip() != '(':
+                raise SyntaxError('関数の直後にはカッコが必要です')
+
+            if ')' not in fmt[i + 2:]:
+                raise SyntaxError('カッコが閉じられていません')
+                
+            else:
+                closing_parenthesis = fmt[i + 2:].index(')')
+                fmt[i] = ''.join(fmt[i : i + closing_parenthesis + 3]).replace('ー', '-').replace('＋', '+').replace('＊', '*').replace('・', '/')
+                fmt = fmt[:i + 1] + fmt[i + closing_parenthesis + 3:]
+
+            fmt[i] = eval(fmt[i], gl0bals, {}) # generators.Generator object
+
+        i += 1
+        continue
+
+    return fmt
