@@ -127,6 +127,4 @@ def format_evaluate(input:str = None) -> list:
         i += 1
         continue
 
-    raise Exception(fmt)
-
     return fmt
