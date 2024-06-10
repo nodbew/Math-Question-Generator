@@ -27,7 +27,7 @@ def template():
         label = '問題形式',
         key = 'template_selectbox',
         options = options,
-        index = options.index('二次方程式の求解'),
+        index = 0,
         on_change = callback
     )
 
