@@ -130,12 +130,13 @@ def format_evaluate(input:str = None) -> list:
             if parenthesis_count != 0:
                 raise SyntaxError('Unterminated parenthesis')
                 
-            fmt[i] = eval(''.join(fmt[i : j + 1]), gl0bals, {}) # generators.SympyFunciton object
+            fmt[i] = eval(''.join(fmt[i : j + 1]), gl0bals, {}) # generators.Generator object
 
             i = j + 1
             continue
 
         i += 1
+        continue
 
     raise Exception(fmt)
 
