@@ -11,7 +11,7 @@ def main():
     
     # Print question and formula
     st.write(st.session_state.current_template.QUESTION)
-    st.write(str(st.session_state.current_template.current_question))
+    st.write(str(st.session_state.current_question))
     st.write('$' + sy.latex(st.session_state.current_question) + '$')
 
     if st.session_state.checked:
