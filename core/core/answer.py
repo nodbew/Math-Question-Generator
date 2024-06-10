@@ -82,14 +82,14 @@ def _convert_to_str(input) -> str:
     # Replace calculation signs
     value_str = value_str.replace(r'\times', '*').replace(r'\div', '/')
 
-    # Replace sympy functions with generator.SympyFunction object
-    value_str = re.sub(r'sy\.(.+?)<(.+?)>', r'SympyFunction(sy.(\1), (\2))', value_str)
-
     return value_str
 
 @error_handler
 def format_evaluate(input:str = None) -> list:
     value_str = _convert_to_str(input)
+
+    # Replace sympy functions with generator.SympyFunction object to enable sympy functions to take Generator object as an argument
+    value_str = re.sub(r'sy\.(.+?)<(.+?)>', r'SympyFunction(sy.(\1), (\2))', value_str)
     
     # Split with operands
     i = 0
@@ -136,4 +136,7 @@ def format_evaluate(input:str = None) -> list:
 @error_handler
 def evaluate(input:str = None) -> sy.Expr:
     value_str = _convert_to_str(input)
+    # Replace temporary expression with the evaluatable expresssion
+    value_str = re.sub(r'sy\.(.+?)<(.+?)>', sy.(\1)\((\2)\)', value_str)
+    
     return eval(value_str, {"__builtins__":None, "sy":sy}, st.session_state.current_template._characters)
