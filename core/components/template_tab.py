@@ -87,6 +87,6 @@ def template():
                 break
                 
         del st.session_state.current_template
-        st.session_state.current_template = st.session_state.templates[0]
+        st.session_state.current_template = list(st.session_state.templates.values())[0]
     
     return
