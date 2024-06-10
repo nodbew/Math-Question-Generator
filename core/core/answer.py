@@ -35,7 +35,6 @@ def calculate_answer(evaluated_question, solve_char):
         return answers
         
 def parse(input:str = None):
-    st.write(input)
     '''
     Parse the recorded user input and returns a latex string.
     return ''.join(st.session_state._input)
@@ -45,6 +44,8 @@ def parse(input:str = None):
         input = st.session_state.input
     else:
         input = st.session_state[input]
+
+    st.write(input)
     
     result = " ".join(str(elem) for elem in input)
     result = result.replace("**", "^").replace('*', '').replace('I', 'i')
