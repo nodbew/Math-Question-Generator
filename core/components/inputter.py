@@ -14,6 +14,10 @@ def _input(input:str|int, target:str) -> None:
         if isinstance(input, int):
             st.session_state[target].extend(['{', input])
             return
+
+        if input in signs.BRACKETS:
+            st.session_state[target].append(input)
+            return
             
         elif input == r'\Character':
             next = st.session_state.format_input_CharacterGenerator.__next__()
@@ -23,10 +27,6 @@ def _input(input:str|int, target:str) -> None:
         
         elif isinstance(input, generators.NumberGenerator):
             st.session_state[target].extend(['{', input, '}'])
-            return
-
-        if input in signs.BRACKETS:
-            st.session_state[target].append(input)
             return
 
         # Other special cases
@@ -41,6 +41,7 @@ def _input(input:str|int, target:str) -> None:
         # Other cases (constants, characters)
         else:
             st.session_state[target].extend(['{', input])
+            return
 
     # The input is a number
     if isinstance(input, int):
