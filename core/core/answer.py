@@ -79,7 +79,7 @@ def _change_to_str(input) -> str:
     value_str = value_str.replace(r'\times', '*').replace(r'\div', '/')
 
     # Replace sympy functions with generator.SympyFunction object
-    value_str = re.sub(r'sy\.(.+?)<(.+?)>', r'generators.SympyFunction(sy.(\1), (\2))', value_str)
+    value_str = re.sub(r'sy\.(.+?)<(.+?)>', r'SympyFunction(sy.(\1), (\2))', value_str)
 
     return value_str
 
@@ -113,7 +113,7 @@ def format_evaluate(input:str = None) -> list:
             fmt[i] = fmt[i].replace('^', '**')
 
         # Evaluate objects
-        if fmt[i].strip().startswith('generators.SympyFunction'):
+        if fmt[i] in ('OperatorGenerator', 'NumberGenerator', 'CharacterGenerator', 'SympyFunction'):
             
             # generators.SympyFunction (sy.sin, (27) * (3)) -> ['generators.SympyFunction(sy.sin, (27)', '*', '(3))']
             j = i
@@ -130,10 +130,12 @@ def format_evaluate(input:str = None) -> list:
             if parenthesis_count != 0:
                 raise SyntaxError('Unterminated parenthesis')
                 
-            fmt[i] = eval(''.join(fmt[i : j + 1])) # generators.SympyFunciton object
+            fmt[i] = eval(''.join(fmt[i : j + 1]), gl0bals, {}) # generators.SympyFunciton object
 
             i = j + 1
             continue
+
+        i += 1
 
     raise Exception(fmt)
 
