@@ -1,6 +1,8 @@
 import random
 import numpy as np
 
+import streamlit as st
+
 class _BaseGenerator:
     '''
     A base class for all generators.
