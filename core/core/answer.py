@@ -4,6 +4,7 @@ import sympy as sy
 import streamlit as st
 
 from . import generators
+from ..data import signs
 
 class SettingViolation(Exception):pass
 class RegulationError(Exception):pass
