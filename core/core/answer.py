@@ -35,6 +35,7 @@ def calculate_answer(evaluated_question, solve_char):
         return answers
         
 def parse(input:str = None):
+    st.write(input)
     '''
     Parse the recorded user input and returns a latex string.
     return ''.join(st.session_state._input)
