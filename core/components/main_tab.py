@@ -8,11 +8,6 @@ Main tab that shows a question and awaits an answer.
 '''
 
 def main():
-    
-    # Print question and formula
-    st.write(st.session_state.current_template.QUESTION)
-    st.write('$' + sy.latex(st.session_state.current_question) + '$')
-
     if st.session_state.checked:
         # Answer checking(also used for initialization)
         if st.session_state.current_template.check_answer(answer.evaluate("input")):
@@ -30,15 +25,18 @@ def main():
             st.error(str(e))
 
         st.session_state.checked = False
+        
+    # Print question and formula
+    st.write(st.session_state.current_template.QUESTION)
+    st.write('$' + sy.latex(st.session_state.current_question) + '$')
+    st.write("$" + answer.parse("input") + "$")
+    
+    with st.empty():
+        st.session_state.input_keyboard.place()
 
-        if st.button('次へ'):
-            st.rerun()
-
-    else:
-
-        # Answer button
-        if st.button('答える'):
-            st.session_state.checked = True
+    # Answer button
+    if st.button('答える'):
+        st.session_state.checked = True
 
     return
     
