@@ -64,7 +64,7 @@ def template():
             # Initialization
             st.session_state.format_input = []
             st.session_state.format_input_CharacterGenerator = generators.CharacterGenerator()
-            st.session_state.format_keyboard = Keyboard(init.default_format_keyboard())
+            st.session_state.format_keyboard = Keyboard(init.default_format_keyboard(), 'format_input')
             
         except SyntaxError:
             st.error('無効な形式です  \nカッコを閉じ忘れたりしていませんか？')
