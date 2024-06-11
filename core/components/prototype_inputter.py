@@ -3,17 +3,6 @@ import streamlit as st
 from ..core import generators
 from ..data import signs
 
-class ArgumentRecorder(int):
-    def __init__(self):
-        self.__value = 0
-        return 
-
-    def __imul__(self, mul:str|int):
-        if isinstance(mul, str):
-            
-        else:
-            self.__value *= mul
-
 def _input(input:str|int, target:str) -> None:
     '''
     Adds the input to st.session_state[target](Assigned in core.components.keyboard.Keyboard.__init__, when creating st.button)
@@ -29,4 +18,4 @@ def _input(input:str|int, target:str) -> None:
             return
 
     elif input in signs.FUNCTIONS:
-        st.session_state[target].extend(['*', input, '{', 0, '}'])
+        st.session_state[target].extend(['*', input, '{', 0, ])
