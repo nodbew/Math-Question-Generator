@@ -13,6 +13,10 @@ if 'settings' not in st.session_state:
     st.session_state.settings = init.settings()
 if 'OperandGenerator' not in st.session_state:
     st.session_state.OperatorGenerator = init.operator_generator()
+if 'input' not in st.session_state:
+    st.session_state.input = []
+if 'input_keyboard' not in st.session_state:
+    st.session_state.input_keyboard = Keyboard(comp_init.default_keyboard(), target = 'input')
 if 'format_input' not in st.session_state:
     st.session_state.format_input = []
 if 'format_keyboard' not in st.session_state:
@@ -38,6 +42,8 @@ if 'checked' not in st.session_state:
     st.session_state.checked = False
 if 'count' not in st.session_state:
     st.session_state.count = 0
+if 'correct_count' not in st.session_state:
+    st.session_state.correct_count = 0
 if 'start_time' not in st.session_state:
     st.session_state.start_time = datetime.datetime.now()
 
