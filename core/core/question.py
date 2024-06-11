@@ -68,7 +68,7 @@ class QuestionFormat:
             for a in ans:
                 try:
                     self._answer.pop(self._answer.index(a))
-                except IndexError:
+                except ValueError:
                     return False
             return True
         else:
