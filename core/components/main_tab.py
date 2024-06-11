@@ -3,6 +3,7 @@ import sympy as sy
 
 from ..core import answer
 from . import initialize as init
+from .keyboard import Keyboard
 
 '''
 Main tab that shows a question and awaits an answer.
