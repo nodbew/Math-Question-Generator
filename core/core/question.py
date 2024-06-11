@@ -1,6 +1,6 @@
 import numpy as np
 import sympy as sy
-import stremalit as st
+import streamlit as st
 from . import answer
 from . import error_handler
 
