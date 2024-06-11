@@ -1,6 +1,6 @@
 import numpy as np
 import sympy as sy
-import streamlit as st
+
 from . import answer
 from . import error_handler
 
@@ -47,11 +47,6 @@ class QuestionFormat:
             # Check the question is valid as a formula
             try:
                 q = eval(question, {"__builtins__":None, 'sy':sy}, characters)
-                st.success(f'''
-                q:{q}
-                type(q):{type(q)}
-                question str:{question}
-                ''')
             except SyntaxError:
                 raise SyntaxError("有効な問題形式ではありません")
         
