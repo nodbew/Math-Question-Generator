@@ -70,7 +70,7 @@ class QuestionFormat:
             return False
 
     def get_answers(self) -> list:
-        if type(self._answer) ! list:
+        if type(self._answer) != list:
             return [self._answer]
         else:
             return self._answer
