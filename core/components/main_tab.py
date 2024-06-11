@@ -16,7 +16,7 @@ def main():
             st.success('正解!正答は ' + '$' + ", ".join(sy.latex(ans) for ans in st.session_state.current_template.get_answers()) + '$')
             st.session_state.correct_count += 1
         else:
-            st.success('不正解...!正解は ' + '$' + ", ".join(sy.latex(ans) for ans in st.session_state.current_template.get_answers()) + '$')
+            st.error('不正解...正解は ' + '$' + ", ".join(sy.latex(ans) for ans in st.session_state.current_template.get_answers()) + '$')
 
         st.session_state.count += 1
 
