@@ -12,7 +12,7 @@ def error_handler(func):
         except Exception as e:
             err_msg = f'エラーが起きました：{str(e)}  \n種別：{e.__class__}'
             st.error(err_msg)
-            return sy.nan
+            return None
         return
 
     return _wrapper
