@@ -65,6 +65,8 @@ def _convert_to_str(input) -> str:
     if input[-1] != '}':
         value_str += ')'
 
+    value_str = re.sub(r',\*', ',', value_str)
+
     # Replace degree with radian
     value_str = re.sub(r'(\d+)^{[\\]circ}', 'sy.rad<\1>', value_str)
 
