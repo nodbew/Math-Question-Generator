@@ -50,7 +50,7 @@ def parse(input:str = None):
 
     return result
 
-def _change_to_str(input) -> str:
+def _convert_to_str(input) -> str:
     if input is None:
         input = st.session_state.input
     else:
@@ -59,13 +59,13 @@ def _change_to_str(input) -> str:
     if input == []:
         return ''
 
-    st.write(input)
-
     value_str = ''.join(elem if isinstance(elem, str) else repr(elem) for elem in input).replace('{', '(').replace('}', ')')
 
     # Check unterminated parenthesis
     if input[-1] != '}':
         value_str += ')'
+
+    value_str = re.sub(r',\*', ',', value_str)
 
     # Replace degree with radian
     value_str = re.sub(r'(\d+)^{[\\]circ}', 'sy.rad<\1>', value_str)
@@ -82,14 +82,14 @@ def _change_to_str(input) -> str:
     # Replace calculation signs
     value_str = value_str.replace(r'\times', '*').replace(r'\div', '/')
 
-    # Replace sympy functions with generator.SympyFunction object
-    value_str = re.sub(r'sy\.(.+?)<(.+?)>', r'SympyFunction(sy.(\1), (\2))', value_str)
-
     return value_str
 
 @error_handler
 def format_evaluate(input:str = None) -> list:
-    value_str = _change_to_str(input)
+    value_str = _convert_to_str(input)
+
+    # Replace sympy functions with generator.SympyFunction object to enable sympy functions to take Generator object as an argument
+    value_str = re.sub(r'sy\.(.+?)<(.+?)>', r'SympyFunction(sy.(\1), (\2))', value_str)
     
     # Split with operands
     i = 0
@@ -131,3 +131,14 @@ def format_evaluate(input:str = None) -> list:
         continue
 
     return fmt
+
+@error_handler
+def evaluate(input:str = None) -> sy.Expr:
+    value_str = _convert_to_str(input)
+    # Replace temporary expression with the evaluatable expresssion
+    value_str = re.sub(r'sy\.(.+?)<(.+?)>', 'sy.(\1)\((\2)\)', value_str)
+
+    if value_str == '':
+        return sy.nan
+    else:
+        return eval(value_str, {"__builtins__":None, "sy":sy}, st.session_state.current_template._characters)

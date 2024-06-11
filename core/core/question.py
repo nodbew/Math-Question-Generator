@@ -60,14 +60,19 @@ class QuestionFormat:
 
         raise answer.RegulationError('条件に合う問題が見つかりませんでした  \n設定を変更するか、問題形式を変更してください')
 
-    def check(self, ans) -> bool:
+    def check_answer(self, ans:sy.Expr) -> bool:
         '''
         Parses the answer in an appropriate way and checks the answer.
         '''
-        if answer.parse(answer) == self._answer:
+        if type(ans) == tuple:
+            for a in ans:
+                try:
+                    self._answer.pop(self._answer.index(a))
+                except ValueError:
+                    return False
             return True
         else:
-            return False
+            return (ans in self._answer and len(self._answer) == 1)
 
     def get_answers(self) -> list:
         if type(self._answer) != list:
