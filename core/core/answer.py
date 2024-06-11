@@ -137,6 +137,6 @@ def format_evaluate(input:str = None) -> list:
 def evaluate(input:str = None) -> sy.Expr:
     value_str = _convert_to_str(input)
     # Replace temporary expression with the evaluatable expresssion
-    value_str = re.sub(r'sy\.(.+?)<(.+?)>', sy.(\1)\((\2)\)', value_str)
+    value_str = re.sub(r'sy\.(.+?)<(.+?)>', 'sy.(\1)\((\2)\)', value_str)
     
     return eval(value_str, {"__builtins__":None, "sy":sy}, st.session_state.current_template._characters)
