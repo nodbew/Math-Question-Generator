@@ -34,7 +34,7 @@ def calculate_answer(evaluated_question, solve_char):
 
         return answers
         
-def parse(input:str = None, arg:str = None):
+def parse(input:str = None):
     '''
     Parse the recorded user input and returns a latex string.
     return ''.join(st.session_state._input)
@@ -42,8 +42,6 @@ def parse(input:str = None, arg:str = None):
     
     if input is None:
         input = st.session_state.input
-    elif input == False:
-        input = arg
     else:
         input = st.session_state[input]
 
