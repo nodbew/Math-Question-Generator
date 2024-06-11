@@ -70,7 +70,10 @@ class QuestionFormat:
             return False
 
     def get_answers(self) -> list:
-        return self._answer
+        if type(self._answer) ! list:
+            return [self._answer]
+        else:
+            return self._answer
 
 class ExpansionQuestionFormat(QuestionFormat):
     '''
