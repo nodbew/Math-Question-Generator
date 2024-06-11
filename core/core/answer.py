@@ -59,8 +59,6 @@ def _convert_to_str(input) -> str:
     if input == []:
         return ''
 
-    st.write(input)
-
     value_str = ''.join(elem if isinstance(elem, str) else repr(elem) for elem in input).replace('{', '(').replace('}', ')')
 
     # Check unterminated parenthesis
