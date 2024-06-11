@@ -58,12 +58,6 @@ def template():
                 case capture:
                     st.error('内部エラーが発生しました;error during matching question type;  \ninvalid question type passed')
                     st.stop()
-
-            # Check if the question is assigned a correct class
-            if r'\Character' in st.session_state.format_input and cls == question.NumberQuestionFormat:
-                cls = question.QuestionFormat
-            elif r'\Character' not in st.session_state.format_input and cls != question.NumberQuestionFormat:
-                cls = question.NumberQuestionFormat
                     
             st.session_state.templates[name_input] = cls(answer.format_evaluate('format_input'))
 
