@@ -44,8 +44,6 @@ def parse(input:str = None):
         input = st.session_state.input
     else:
         input = st.session_state[input]
-
-    st.write(input)
     
     result = " ".join(str(elem) for elem in input)
     result = result.replace("**", "^").replace('*', '').replace('I', 'i')
