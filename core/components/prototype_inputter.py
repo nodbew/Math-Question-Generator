@@ -3,7 +3,7 @@ import streamlit as st
 from ..core import generators
 from ..data import signs
 
-class ArgumentRecorder(str, int):
+class ArgumentRecorder(int):
     def __init__(self):
         self.__value = 0
         return 
