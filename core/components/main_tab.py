@@ -10,7 +10,6 @@ Main tab that shows a question and awaits an answer.
 '''
 
 def main():
-    st.write(type(st.session_state.current_question))
     if st.session_state.checked:
         # Answer checking(also used for initialization)
         if st.session_state.current_template.check_answer(answer.evaluate("input")):
