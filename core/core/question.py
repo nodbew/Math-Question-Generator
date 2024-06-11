@@ -47,7 +47,7 @@ class QuestionFormat:
             # Check the question is valid as a formula
             try:
                 q = eval(question, {"__builtins__":None, 'sy':sy}, characters)
-                raise Exception(f'''
+                st.success(f'''
                 q:{q}
                 type(q):{type(q)}
                 question str:{question}
