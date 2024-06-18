@@ -133,7 +133,7 @@ class NumberQuestionFormat(QuestionFormat):
         
             # Hold the answer for the question
             try:
-                self._answer = eval(question, {'__builtins__':None, 'sy':sy}, self._characters), self._solve_char
+                self._answer = eval(question, {'__builtins__':None, 'sy':sy}, self._characters)
             except answer.SettingViolation:
                 continue
             else:
