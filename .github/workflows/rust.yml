@@ -1,0 +1,26 @@
+name: Rust-core-check
+
+on:
+  push:
+    branches: [ "rust-base-dev" ]
+  pull_request:
+    branches: [ "rust-base-dev" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+defaults:
+  run: 
+    working-directory: ./rust-core
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Check
+      run: cargo check
+    - name: Run tests
+      run: cargo test
