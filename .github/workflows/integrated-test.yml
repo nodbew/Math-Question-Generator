@@ -39,7 +39,7 @@ jobs:
     - name: Construct venv
       run: |
         python -m venv .venv
-        . venv/bin/activate
+        . .venv/bin/activate
         
     - name: Install maturin
       run: pip install maturin
