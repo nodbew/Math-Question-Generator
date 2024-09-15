@@ -6,7 +6,7 @@ edition = "2021"
 
 [lib]
 name = "rust_core"
-crate_type = ["cdylib"]
+crate-type = ["cdylib"]
 
 [dependencies]
 rand = "0.8.5"
