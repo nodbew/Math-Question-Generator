@@ -26,11 +26,6 @@ jobs:
       run: |
         rustup set profile minimal
         rustup component add clippy
-          
-    - name: Check Rust extension
-      working-directory: ./rust-core
-      run: |
-        cargo check --verbose
         
     - name: Test Rust extension
       working-directory: ./rust-core
