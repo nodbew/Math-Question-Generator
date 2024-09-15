@@ -28,8 +28,8 @@ jobs:
         rustup component add clippy
           
     - name: Check Rust extension
+      working-directory: ./rust-core
       run: |
-        working-directory: ./rust-core
         cargo check --verbose
         
     - name: Test Rust extension
@@ -40,6 +40,7 @@ jobs:
       run: |
         python -m venv .venv
         . venv/bin/activate
+        
     - name: Install maturin
       run: pip install maturin
       
