@@ -56,8 +56,8 @@ class Keyboard:
             self._buttons = [btn for btn in self._buttons if not (btn.key == f'key_{key}_at_keyboard_{id(self)}')]
             return
         elif type(key) == list:
-            for key in keys:
-                self.remove_key(key)
+            for k in key:
+                self.remove_key(k)
             return
         else:
             raise TypeError(f'An argument for Keyboard.remove_key method must be a str of a list, not {type(key)}')
