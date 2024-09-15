@@ -46,7 +46,7 @@ jobs:
       
     - name: Build Python module
       working-directory: ./rust-core
-      run: maturin develop
+      run: maturin develop --release 
       
     - name: Install dependencies
       run: |
