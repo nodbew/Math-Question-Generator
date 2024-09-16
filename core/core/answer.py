@@ -7,6 +7,7 @@ from . import generators
 from ..data import signs
 from .error_handler import error_handler
 
+# Custom exceptions
 class SettingViolation(Exception):pass
 class RegulationError(Exception):pass
 
@@ -84,7 +85,6 @@ def _convert_to_str(input) -> str:
 
     return value_str
 
-@error_handler
 def format_evaluate(input:str = None) -> list:
     value_str = _convert_to_str(input)
 
@@ -132,8 +132,10 @@ def format_evaluate(input:str = None) -> list:
 
     return fmt
 
-@error_handler
 def evaluate(input:str = None) -> sy.Expr:
+    """
+    takes a string and returns a simpy value that represents the expression.
+    """
     value_str = _convert_to_str(input)
     # Replace temporary expression with the evaluatable expresssion
     value_str = re.sub(r'sy\.(.+?)<(.+?)>', 'sy.(\1)\((\2)\)', value_str)
