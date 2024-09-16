@@ -1,3 +1,7 @@
+"""
+Constant values used in the code
+"""
+
 CALCULATION_SIGNS = ('+', '-', '*', '/', '^', r'^{\circ}', r'\times', r'\div')
 BRACKETS = ('{', '}', ',')
 FUNCTIONS = (r'\log_', r'\sin', r'\cos', r'\tan', r'\sqrt[2]')
